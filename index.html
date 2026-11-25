@@ -386,7 +386,7 @@
     ※ 「固定ギャラ」は入力した金額がそのまま報酬額(内税)になります(上乗せ・参加費なし)。固定ギャラの人の集客は、「集客を含める」にチェックを入れた場合だけ全体50名インセンティブのカウントに含めます。<br>
     ※ 報酬額がマイナスの場合(参加費 &gt; 報酬)は源泉徴収なし・出演者からお支払いいただく金額として赤字表示されます。<br>
     ※ 会場・配信チケットの人数を手で直した場合、カード上部の人数と報酬計算は直した数字を使います(カード右側の名前リストはExcelの内容のままです)。<br>
-    ※ スプレッドシートのメニューから開くと、その週の開催日とブロマイド枚数(会場・発送)を受け取り、同じ名前の出演者に自動で入れます。Excelを入れたあとにも入れ直します(手で直した枚数はその時に上書きされます)。名前はスペースや全角半角の違いを無視して比べます。シートにない名前は「シートに該当なし」と表示するので、手で入力してください。<br>
+    ※ スプレッドシートのメニューから開くと、その週の開催日とブロマイド枚数(会場・発送)を受け取り、同じ名前の出演者に自動で入れます。Excelを入れたあとにも入れ直します(手で直した枚数はその時に上書きされます)。名前はスペースや全角半角の違いを無視して比べます。シートにない名前は「シートに該当なし」と表示するので、手で入力してください。出演者の並び順も、Excelを入れた時点でシートから届いた順になります(シートにない人は後ろに、集客の多い順で並びます)。<br>
     ※ ブラウザを閉じる・再読み込みすると入力内容は消えます。
   </p>
 </div>
@@ -624,6 +624,7 @@ function syncFromExcel(){
   });
   if(unassigned){ $("extraAudience").value = unassigned; }
   applySheetData(); // シートから受け取った枚数がある場合は、ここで入れ直す
+  sortBySheetOrder(); // シートから開いた場合は、シートから届いた順に並べ直す
 
   // イベント名・開催日は、手で入力していない場合のみ自動補完する
   const nameEl = $("evName"), dateEl = $("evDate");
@@ -669,6 +670,25 @@ function findSheetRow(name){
   const key = normKey(name);
   return key ? (sheetData.rows.find(r=>r.key===key) || null) : null;
 }
+// 出演者をシートから届いた順に並べる。一覧にない人は後ろ(その中では集客の多い順)。
+// シートから開いていないときは何もしない(今までどおり、Excelを入れた時点の集客の多い順)。
+function sheetIndex(name){
+  const key = normKey(name);
+  return key ? sheetData.rows.findIndex(r=>r.key===key) : -1;
+}
+function sortBySheetOrder(){
+  if(!sheetData) return;
+  const aud = p => p.tVenue + p.tStream;
+  performers = performers
+    .map((p,i)=>({p, i, si: sheetIndex(p.name)}))
+    .sort((x,y)=>{
+      const xin = x.si >= 0, yin = y.si >= 0;
+      if(xin && yin) return x.si - y.si || x.i - y.i;
+      if(xin !== yin) return xin ? -1 : 1;
+      return aud(y.p) - aud(x.p) || x.p.name.trim().localeCompare(y.p.name.trim(), "ja") || x.i - y.i;
+    })
+    .map(o=>o.p);
+}
 // 全員分を入れ直す(入力欄は、このあと renderAll で作り直される)
 function applySheetData(){
   if(!sheetData) return;
@@ -705,6 +725,7 @@ function renderSheetPanel(){
       : `<div>出演者の ${named.length}名すべてに、ブロマイド枚数を入れました。</div>`;
     if(unused.length) h += `<div class="sm">シートにあるが、ツールの出演者にいない名前: ${unused.map(r=>escapeHtml(r.name)).join("、")}</div>`;
   }
+  h += `<div class="sm">並び順: Excelを入れると、シートから届いた順に並べます(一覧にない人は後ろ)。届いた順: ${sheetData.rows.map(r=>escapeHtml(r.name)).join(" → ")}</div>`;
   $("sheetMsg").innerHTML = h;
 }
 
@@ -1258,8 +1279,9 @@ async function exportAdmin(){
 function saveCsv(){
   const evD = isoToDot($("evDate").value);
   const evN = $("evName").value || "";
-  const rows = performers.map(p=>({name:p.name.trim() || "出演者"+p.id, v:p.tVenue, s:p.tStream}))
-    .sort((x,y)=> (y.v+y.s)-(x.v+x.s) || x.name.localeCompare(y.name,"ja"));
+  const rows = performers.map(p=>({name:p.name.trim() || "出演者"+p.id, v:p.tVenue, s:p.tStream}));
+  // シートから開いた場合は画面と同じ並び(シートの順)。そうでなければ今までどおり集客の多い順。
+  if(!sheetData) rows.sort((x,y)=> (y.v+y.s)-(x.v+x.s) || x.name.localeCompare(y.name,"ja"));
   sortedGroups(aggregateLists()).filter(a=>UNASSIGNED_NAMES.includes(a.performer))
     .forEach(a=>rows.push({name:a.performer, v:a.vQty, s:a.sQty}));
   if(!rows.length){ toast("保存できるデータがありません"); return; }
