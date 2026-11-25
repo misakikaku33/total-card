@@ -65,6 +65,13 @@
     padding:28px 24px;text-align:center;cursor:pointer;transition:border-color .18s, background .18s;
     margin-bottom:18px;box-shadow:var(--shadow);
   }
+  /* ===== 上部を左右に分ける(左:イベント設定 / 右:Excelを入れる場所。半々) ===== */
+  .top2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;align-items:stretch;margin-bottom:18px;}
+  .top2 > .panel, .top2 > .dz{margin-bottom:0;}
+  .top2 > .dz{display:flex;flex-direction:column;justify-content:center;}
+  details.setnote{margin-top:12px;}
+  details.setnote summary{font-size:11.5px;color:var(--ink-soft);cursor:pointer;padding:3px 0;width:fit-content;}
+  details.setnote .note{margin-top:4px;}
   .dz:hover,.dz.over{border-color:var(--green);background:#f7fbe9;}
   .dz .big{font-size:16px;font-weight:700;margin-bottom:8px;color:var(--green-dark);}
   .dz .small{font-size:12.5px;color:var(--ink-soft);line-height:1.9;max-width:700px;margin:0 auto;}
@@ -189,6 +196,7 @@
   .pv-tab.on{background:var(--green-deep);color:#fff;border-color:var(--green-deep);border-style:solid;}
   .pv .note{margin-top:10px;}
   @media (max-width:999px){
+    .top2{grid-template-columns:minmax(0,1fr);gap:18px;}
     .split{display:block;}
     .split-r{position:static;max-height:none;overflow:visible;margin-bottom:20px;}
   }
@@ -293,34 +301,40 @@
     <p class="sub">来場者リストと配信購入リストのExcelを入れると、出演者ごとの集客数が自動で入ります。プランなどを入力すると、集客リストと精算をまとめた1枚のカードを保存できます(2026年8〜12月プラン対応)。</p>
   </div>
 
-  <label class="dz" id="dz">
-    <input type="file" id="fileInput" accept=".xlsx,.xls" multiple>
-    <div class="big">Excelファイルをここにドロップ(クリックでも選択できます)</div>
-    <div class="small">
-      「来場者リスト」と「配信購入リスト」の2ファイルをまとめて入れてOK。列名から自動で判別します。<br>
-      来場者=「扱い」列 / 配信=「アンケート回答」列 を出演者名として集計します。データはブラウザ内だけで処理されます。
+  <!-- 上部: 左にイベント設定、右にExcelを入れる場所(半々) -->
+  <div class="top2">
+    <div class="panel">
+      <h2>イベント設定</h2>
+      <div class="settings-grid">
+        <div class="field"><label>イベント名</label><input type="text" id="evName" placeholder="例) ○○公演 vol.12" style="width:220px"></div>
+        <div class="field"><label>開催日</label><input type="date" id="evDate" style="width:160px"></div>
+        <div class="field"><label>チケット単価(円)</label><input type="number" id="ticketPrice" value="2800" min="0"></div>
+        <div class="field"><label>ブロマイド単価(円)</label><input type="number" id="bromidePrice" value="500" min="0"></div>
+        <div class="field"><label>出演者以外の集客(主催・作者集客など)</label><input type="number" id="extraAudience" value="0" min="0"></div>
+      </div>
+      <details class="setnote">
+        <summary>注意書きを見る</summary>
+        <p class="note">
+        ※ Excelを入れると、出演者名が一致する行は会場・配信チケット数を上書きします(プランやブロマイドなどの入力は残ります)。一致しない名前は新規出演者(プラン1)として追加します。<br>
+        ※ 出演者名が「（扱いなし）」「指定なし」の集客は「出演者以外の集客」欄にまとめて入力します。<br>
+        ※ イベント名・開催日は、手で入力していない場合のみExcelの内容で自動補完します。
+        </p>
+      </details>
     </div>
-    <div class="filestate">
-      <span class="fchip" id="chipVenue"><span class="dot"></span><span>来場者リスト:未読込</span></span>
-      <span class="fchip" id="chipStream"><span class="dot"></span><span>配信購入リスト:未読込</span></span>
-    </div>
-    <div id="loadStatus"></div>
-  </label>
 
-  <div class="panel">
-    <h2>イベント設定</h2>
-    <div class="settings-grid">
-      <div class="field"><label>イベント名</label><input type="text" id="evName" placeholder="例) ○○公演 vol.12" style="width:220px"></div>
-      <div class="field"><label>開催日</label><input type="date" id="evDate" style="width:160px"></div>
-      <div class="field"><label>チケット単価(円)</label><input type="number" id="ticketPrice" value="2800" min="0"></div>
-      <div class="field"><label>ブロマイド単価(円)</label><input type="number" id="bromidePrice" value="500" min="0"></div>
-      <div class="field"><label>出演者以外の集客(主催・作者集客など)</label><input type="number" id="extraAudience" value="0" min="0"></div>
-    </div>
-    <p class="note" style="margin-top:12px;">
-      ※ Excelを入れると、出演者名が一致する行は会場・配信チケット数を上書きします(プランやブロマイドなどの入力は残ります)。一致しない名前は新規出演者(プラン1)として追加します。<br>
-      ※ 出演者名が「（扱いなし）」「指定なし」の集客は「出演者以外の集客」欄にまとめて入力します。<br>
-      ※ イベント名・開催日は、手で入力していない場合のみExcelの内容で自動補完します。
-    </p>
+    <label class="dz" id="dz">
+      <input type="file" id="fileInput" accept=".xlsx,.xls" multiple>
+      <div class="big">Excelファイルをここにドロップ(クリックでも選択できます)</div>
+      <div class="small">
+        「来場者リスト」と「配信購入リスト」の2ファイルをまとめて入れてOK。列名から自動で判別します。<br>
+        来場者=「扱い」列 / 配信=「アンケート回答」列 を出演者名として集計します。データはブラウザ内だけで処理されます。
+      </div>
+      <div class="filestate">
+        <span class="fchip" id="chipVenue"><span class="dot"></span><span>来場者リスト:未読込</span></span>
+        <span class="fchip" id="chipStream"><span class="dot"></span><span>配信購入リスト:未読込</span></span>
+      </div>
+      <div id="loadStatus"></div>
+    </label>
   </div>
 
   <div class="panel hidden" id="sheetPanel">
