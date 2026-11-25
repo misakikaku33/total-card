@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>【ミサキカク毎週公演】集客・報酬カード作成ツール</title>
+<!-- ファビコン(タブのアイコン): 緑地に円マーク。ファイル1つで完結するよう埋め込み -->
+<link rel="icon" type="image/png" sizes="64x64" href="data:image/png;base64,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">
+<link rel="icon" type="image/svg+xml" sizes="any" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTQiIGZpbGw9IiM1NTgyM2YiLz48ZyBzdHJva2U9IiNmYmZhZjEiIHN0cm9rZS13aWR0aD0iNi41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGZpbGw9Im5vbmUiPjxwYXRoIGQ9Ik0xOCAxMyBMMzIgMzIgTDQ2IDEzIi8+PHBhdGggZD0iTTMyIDMyIFY1MiIvPjxwYXRoIGQ9Ik0xOSAzNCBINDUiLz48cGF0aCBkPSJNMTkgNDQgSDQ1Ii8+PC9nPjwvc3ZnPg==">
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#2b2f26;
+    --ink-soft:#66714c;
+    --paper:#f6f5ea;
+    --paper-deep:#eceedb;
+    --card:#fffefb;
+    --line:#dfe3c6;
+    --green:#55823f;
+    --green-deep:#3c6230;
+    --green-dark:#2f4a27;
+    --leaf:#7fa653;
+    --leaf-soft:#e8f0d4;
+    --wine:#7a2020;
+    --accent:#2f7d53;
+    --danger:#b3403a;
+    --shadow:0 10px 30px rgba(47,74,39,.08), 0 2px 6px rgba(47,74,39,.05);
+    --jp:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Hiragino Sans","Noto Sans JP","Noto Sans CJK JP","Yu Gothic",sans-serif;
+    --min:"Shippori Mincho","Hiragino Mincho ProN","Noto Serif JP","Noto Serif CJK JP","Yu Mincho",serif;
+    --num:"Outfit","Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Noto Sans JP","Noto Sans CJK JP",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:var(--jp);
+    background:
+      radial-gradient(1200px 500px at 50% -200px, rgba(127,166,83,.14), transparent 60%),
+      linear-gradient(180deg, var(--paper) 0%, var(--paper-deep) 100%);
+    background-attachment:fixed;
+    color:var(--ink);
+    font-feature-settings:"palt";
+    padding:26px 20px 90px;
+  }
+  .wrap{max-width:none;margin:0 auto;}
+  .hidden{display:none!important;}
+
+  /* ===== 見出し ===== */
+  .masthead{margin-bottom:22px;}
+  .masthead .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:11px;letter-spacing:.28em;color:var(--green);
+    font-weight:700;margin-bottom:6px;
+  }
+  .masthead .eyebrow::before,.masthead .eyebrow::after{content:"";width:26px;height:1px;background:var(--leaf);}
+  h1{font-family:var(--min);font-size:27px;font-weight:800;letter-spacing:.08em;color:var(--green-dark);}
+  .sub{color:var(--ink-soft);font-size:12.5px;margin-top:6px;line-height:1.8;}
+
+  /* ===== Excel投入口 ===== */
+  .dz{
+    display:block;width:100%;border:2px dashed #c9d2a6;border-radius:16px;background:var(--card);
+    padding:28px 24px;text-align:center;cursor:pointer;transition:border-color .18s, background .18s;
+    margin-bottom:18px;box-shadow:var(--shadow);
+  }
+  .dz:hover,.dz.over{border-color:var(--green);background:#f7fbe9;}
+  .dz .big{font-size:16px;font-weight:700;margin-bottom:8px;color:var(--green-dark);}
+  .dz .small{font-size:12.5px;color:var(--ink-soft);line-height:1.9;max-width:700px;margin:0 auto;}
+  .dz input{display:none;}
+  .filestate{display:flex;gap:12px;justify-content:center;margin-top:16px;flex-wrap:wrap;}
+  .fchip{
+    display:inline-flex;align-items:center;gap:8px;font-size:12.5px;line-height:1;padding:9px 16px;
+    border-radius:99px;border:1px solid var(--line);background:#fff;color:var(--ink-soft);white-space:nowrap;
+  }
+  .fchip.ok{border-color:var(--green);color:var(--green-deep);background:var(--leaf-soft);font-weight:700;}
+  .fchip .dot{flex:none;width:8px;height:8px;border-radius:50%;background:var(--line);}
+  .fchip.ok .dot{background:var(--green);}
+  #loadStatus{font-size:12px;color:var(--green-deep);margin-top:12px;min-height:1em;font-weight:500;}
+
+  /* ===== パネル共通 ===== */
+  .panel{
+    background:var(--card);border:1px solid var(--line);border-radius:16px;
+    padding:18px 20px;margin-bottom:18px;box-shadow:var(--shadow);
+  }
+  .panel h2{
+    font-family:var(--min);font-size:15px;font-weight:700;letter-spacing:.12em;margin-bottom:14px;
+    display:flex;align-items:center;gap:9px;color:var(--green-dark);
+  }
+  .panel h2::before{
+    content:"";width:9px;height:9px;border-radius:50%;background:var(--green);
+    box-shadow:0 0 0 3px rgba(85,130,63,.18);
+  }
+  .settings-grid{display:flex;flex-wrap:wrap;gap:14px 16px;}
+  .field{display:flex;flex-direction:column;gap:5px;}
+  .field label{font-size:11px;color:var(--ink-soft);letter-spacing:.05em;font-weight:500;}
+  input[type=text],input[type=number],input[type=date],select{
+    font:inherit;font-size:14px;padding:8px 11px;border:1px solid var(--line);
+    border-radius:10px;background:#fff;color:var(--ink);
+    font-variant-numeric:tabular-nums;transition:border-color .15s, box-shadow .15s;
+  }
+  input[type=date]{font-family:var(--num);}
+  input[type=number]{width:112px;text-align:right;font-family:var(--num);}
+  .field label.check{display:inline-flex;align-items:center;gap:7px;font-size:13px;color:var(--ink);height:37px;cursor:pointer;letter-spacing:0;}
+  .field label.check input{width:17px;height:17px;accent-color:var(--green);cursor:pointer;}
+  input:focus,select:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 3px rgba(85,130,63,.22);}
+
+  /* ===== 合計バー ===== */
+  .total-bar{
+    position:relative;display:flex;flex-wrap:wrap;gap:8px 34px;align-items:baseline;
+    background:linear-gradient(135deg, var(--green-dark) 0%, var(--green-deep) 55%, var(--green) 100%);
+    color:#f7f4e3;border-radius:16px;padding:18px 22px 16px;margin-bottom:20px;
+    box-shadow:0 14px 34px rgba(47,74,39,.28);overflow:hidden;
+  }
+  .total-bar::before{
+    content:"";position:absolute;inset:0 0 auto 0;height:6px;
+    background:repeating-linear-gradient(90deg, #dde8ba 0 6px, transparent 6px 18px);opacity:.6;
+  }
+  .total-bar .lbl{font-size:10.5px;opacity:.78;letter-spacing:.18em;margin-bottom:2px;}
+  .total-bar .big{font-family:var(--num);font-size:27px;font-weight:700;font-variant-numeric:tabular-nums;}
+  .total-bar .ok{color:#f4f8cf;}
+
+  /* ===== 出演者ブロック ===== */
+  .performer{background:var(--card);border:1px solid var(--line);border-radius:16px;margin-bottom:16px;overflow:hidden;box-shadow:var(--shadow);}
+  .performer-head{
+    display:flex;flex-wrap:wrap;gap:10px;align-items:center;padding:13px 16px;border-bottom:1px solid var(--line);
+    background:linear-gradient(180deg,#fafbef,#f3f5e3);
+  }
+  .performer-head input[type=text]{width:170px;font-weight:700;}
+  .plan-chip{font-size:11px;font-weight:700;padding:4px 12px;border-radius:999px;letter-spacing:.05em;white-space:nowrap;}
+  .inputs-row{display:flex;flex-wrap:wrap;gap:12px 14px;padding:14px 16px;border-bottom:1px dashed var(--line);}
+  .field.memo{flex:1 1 260px;}
+  .field.memo input{width:100%;text-align:left;font-family:inherit;}
+  .result-row{display:flex;flex-wrap:wrap;gap:6px 24px;padding:11px 16px;font-size:13px;align-items:baseline;background:#fafaf0;}
+  .result-row .kv{display:flex;gap:6px;align-items:baseline;}
+  .result-row .k{font-size:11px;color:var(--ink-soft);}
+  .result-row .v{font-variant-numeric:tabular-nums;font-weight:600;font-family:var(--num);}
+  .result-row .pay{font-size:19px;font-weight:800;color:var(--accent);}
+  .result-row .pay.neg{color:var(--danger);}
+  details.breakdown{padding:0 16px 12px;background:#fafaf0;}
+  details.breakdown summary{font-size:11px;color:var(--ink-soft);cursor:pointer;padding:5px 0;}
+  details.breakdown .bd{font-size:12px;line-height:1.95;color:var(--ink-soft);font-variant-numeric:tabular-nums;}
+
+  /* ===== ボタン ===== */
+  .btn{
+    font:inherit;font-size:13px;font-weight:700;padding:10px 18px;border-radius:999px;
+    border:1px solid var(--green-deep);background:var(--green-deep);color:#f7f4e3;cursor:pointer;letter-spacing:.05em;
+    transition:transform .12s, box-shadow .12s, background .12s;box-shadow:0 4px 12px rgba(47,74,39,.18);
+  }
+  .btn:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 7px 16px rgba(47,74,39,.24);}
+  .btn.ghost{background:#fff;color:var(--green-deep);box-shadow:none;}
+  .btn.ghost:hover:not(:disabled){background:#f6f9ea;}
+  .btn.small{font-size:12px;padding:7px 14px;}
+  .btn.del{border-color:#e3c4c1;color:var(--danger);background:#fff;font-size:11px;padding:5px 12px;margin-left:auto;box-shadow:none;}
+  .btn.del:hover{background:#fdf1f0;}
+  .btn.quiet{border-color:var(--line);color:var(--ink-soft);background:#fff;box-shadow:none;}
+  .btn:disabled{opacity:.4;cursor:not-allowed;}
+  .toolbar{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0;}
+
+  /* ===== 管理者用集計表 ===== */
+  #adminArea{background:#fff;border:1px solid var(--line);border-radius:16px;padding:24px;margin-top:8px;overflow-x:auto;box-shadow:var(--shadow);}
+  #adminArea .share-title{font-family:var(--min);font-size:18px;font-weight:800;letter-spacing:.06em;color:var(--green-dark);}
+  #adminArea .share-date{font-size:12px;color:var(--ink-soft);margin-bottom:4px;}
+  #adminArea .share-total{font-size:12px;color:var(--ink-soft);margin-bottom:14px;}
+  table.share{width:100%;border-collapse:collapse;font-size:12.5px;font-variant-numeric:tabular-nums;}
+  table.share th,table.share td{border:1px solid var(--line);padding:7px 8px;text-align:right;white-space:nowrap;}
+  table.share th{background:#f2f4e2;font-size:11px;letter-spacing:.05em;text-align:center;color:var(--green-dark);}
+  table.share td:first-child,table.share td:nth-child(2){text-align:left;}
+  table.share td.memocell{text-align:left;white-space:normal;min-width:120px;font-size:11.5px;color:var(--ink-soft);}
+  table.share td.paycell{font-weight:800;}
+  table.share td.neg{color:var(--danger);}
+  table.share tr.totalrow td{background:#f2f4e2;font-weight:800;}
+
+  /* ===== カードの置き場(画面では縮小表示、保存は原寸) ===== */
+  /* ===== 左右に分ける(左6:入力欄 / 右4:プレビュー。右は画面に固定) ===== */
+  .split{display:flex;gap:20px;align-items:flex-start;}
+  .split-l{flex:6;min-width:0;}
+  .split-r{flex:4;min-width:0;position:sticky;top:14px;max-height:calc(100vh - 28px);overflow-y:auto;}
+  .split-l .toolbar{margin:4px 0 20px;}
+  .performer.is-current{border-color:var(--green);box-shadow:0 0 0 3px rgba(85,130,63,.22), var(--shadow);}
+  .pv{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px 16px;}
+  .pv-head{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+  .pv-head .t{font-family:var(--min);font-size:15px;font-weight:700;letter-spacing:.12em;color:var(--green-dark);margin-right:auto;}
+  .pv-tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;}
+  .pv-tab{font:inherit;font-size:12px;font-weight:700;padding:6px 13px;border-radius:99px;cursor:pointer;background:#fff;color:var(--green-deep);border:1px solid var(--line);}
+  .pv-tab:hover{background:#f6f9ea;}
+  .pv-tab.solo{border-style:dashed;color:var(--ink-soft);}
+  .pv-tab.on{background:var(--green-deep);color:#fff;border-color:var(--green-deep);border-style:solid;}
+  .pv .note{margin-top:10px;}
+  @media (max-width:999px){
+    .split{display:block;}
+    .split-r{position:static;max-height:none;overflow:visible;margin-bottom:20px;}
+  }
+  /* ===== 拡大表示 ===== */
+  .zoom{position:fixed;inset:0;z-index:90;background:rgba(30,40,25,.74);overflow:auto;padding:60px 24px 40px;}
+  .zoom-x{position:fixed;top:14px;right:20px;z-index:91;font:inherit;font-size:13px;font-weight:700;padding:8px 18px;border-radius:99px;border:none;background:#fff;color:var(--green-dark);cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.3);}
+  .zoom-in{margin:0 auto;border-radius:14px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.45);cursor:zoom-out;}
+  .card-slot{margin-bottom:0;}
+  .card-tools{display:flex;justify-content:flex-end;align-items:center;gap:10px;margin-bottom:8px;}
+  .card-tools .who{margin-right:auto;font-size:12.5px;font-weight:700;color:var(--green-dark);}
+  .stage{overflow:hidden;border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);background:#fbfaf1;cursor:zoom-in;}
+  .empty-note{color:var(--ink-soft);font-size:13px;}
+
+  /* ===== 出演者に送るカード(1420px固定) ===== */
+  .mc{
+    width:1420px;background:#fbfaf1;color:#2b2333;font-family:var(--jp);
+    font-feature-settings:normal;transform-origin:top left;line-height:1.5;
+  }
+  .mc.solo{width:940px;}
+  .mc-hd{background:#55823f;color:#f7f4e3;padding:26px 34px 22px;display:flex;align-items:flex-end;gap:20px;}
+  .mc-ev{font-size:13px;letter-spacing:.14em;color:#f4f8cf;margin-bottom:8px;}
+  .mc-nm{font-family:var(--min);font-size:36px;font-weight:800;letter-spacing:.08em;line-height:1.25;}
+  .mc-nm small{font-family:var(--jp);font-size:14px;font-weight:500;letter-spacing:.16em;margin-left:14px;color:#dde8ba;}
+  .mc-mt{margin-left:auto;font-size:12.5px;color:#f4f8cf;margin-bottom:8px;white-space:nowrap;}
+  .mc-st{display:flex;background:#fff;border-bottom:1px dashed #dfe3c6;}
+  .mc-st > div{flex:1;padding:16px 10px;text-align:center;border-right:1px dashed #dfe3c6;}
+  .mc-st > div:last-child{border-right:none;}
+  .mc-st .lb{display:block;font-size:11px;letter-spacing:.25em;font-weight:700;color:#66714c;}
+  .mc-st .vl{font-family:var(--num);font-size:34px;font-weight:700;color:#4a7040;line-height:1.2;}
+  .mc-st .vl span{font-family:var(--jp);font-size:12px;font-weight:700;margin-left:3px;color:#66714c;}
+  .mc-st .hot .vl{color:#7a2020;}
+  .mc-st .sum .vl{color:#2b2333;}
+  .mc-bd{display:flex;gap:28px;align-items:flex-start;padding:26px 34px 32px;}
+
+  /* 左:精算表(文字は集客表の約1.25倍) */
+  .mc-rw{width:507px;flex:none;background:#fff;border:1px solid #dfe3c6;border-radius:14px;padding:16px 20px 18px;}
+  .mc-rw-h{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+  .mc-sec{font-size:11px;font-weight:900;letter-spacing:.18em;padding:5px 12px;border-radius:6px;color:#fff;display:inline-block;}
+  .mc-rw .mc-sec{font-size:13.75px;background:#2b2333;}
+  .mc-plan{font-size:13.75px;font-weight:700;padding:4px 14px;border-radius:999px;letter-spacing:.06em;white-space:nowrap;}
+  .mc-rw table{width:100%;border-collapse:collapse;font-size:16.25px;font-variant-numeric:tabular-nums;}
+  .mc-rw td{padding:7.5px 0;border-bottom:1px dashed #dfe3c6;}
+  .mc-rw td.k{color:#66714c;font-size:15px;}
+  .mc-rw td.v{text-align:right;font-weight:600;font-family:var(--num);white-space:nowrap;}
+  .mc-rw td.v .s{font-family:var(--jp);font-size:13px;color:#66714c;font-weight:500;}
+  .mc-rw tr.sect td{border-bottom:2px solid #2b2333;font-weight:800;color:#2b2333;}
+  .mc-pay{
+    display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:15px;padding:13px 18px;
+    border-radius:10px;background:#f6edd6;border:1px solid #e6d5a8;
+  }
+  .mc-pay + .mc-pay{margin-top:10px;}
+  .mc-pay .k{font-size:15px;font-weight:700;letter-spacing:.06em;color:#6b5620;line-height:1.35;}
+  .mc-pay .k .n{display:block;font-size:12.5px;font-weight:500;letter-spacing:.02em;margin-top:3px;}
+  .mc-pay.inv{background:#eef3e2;border-color:#c4d3a2;}
+  .mc-pay.inv .k{color:#3c6230;}
+  .mc-pay.inv .v{color:#2b2333;}
+  .mc-pay .v{font-family:var(--num);font-size:31.25px;font-weight:800;font-variant-numeric:tabular-nums;color:#2f7d53;}
+  .mc-pay .v.neg{color:#b3403a;}
+  .mc-memo{margin-top:12px;padding:9px 13px;border-radius:8px;background:#f4f5e4;font-size:14px;line-height:1.7;color:#2b2333;word-break:break-word;}
+  .mc-memo .mk{font-size:12px;color:#66714c;letter-spacing:.1em;display:block;margin-bottom:2px;}
+  .mc-ft{font-size:12.5px;color:#66714c;margin-top:11px;line-height:1.7;}
+
+  /* 右:集客表 */
+  .mc-gl{flex:1;min-width:0;}
+  .mc-gl .mc-sec{margin-bottom:10px;}
+  .mc-sec.venue{background:#4a7040;}
+  .mc-sec.stream{background:#7a2020;}
+  .mc-list{width:100%;border-collapse:collapse;font-size:13px;table-layout:fixed;margin-bottom:26px;color:#2f3a2a;}
+  .mc-list.last{margin-bottom:0;}
+  .mc-list th{font-size:10.5px;letter-spacing:.14em;font-weight:700;text-align:left;padding:8px 12px;color:#55663c;border-bottom:1.5px solid #55823f;white-space:nowrap;}
+  .mc-list td{padding:9px 12px;border-bottom:1px solid #dfe3c6;vertical-align:top;word-break:break-word;overflow-wrap:break-word;}
+  .mc-list tbody tr:nth-child(even) td{background:#f4f5e4;}
+  .mc-list th.num,.mc-list td.num{text-align:right;font-variant-numeric:tabular-nums;}
+  .mc-list td.idx{font-size:12px;color:#66714c;}
+  .mc-list td.b{font-weight:700;}
+  .mc-list td.d{font-size:12px;color:#66714c;}
+  .mc-list td.c{font-size:12px;line-height:1.6;color:#414c33;}
+  .mc-list tr.is-cancel td{color:#a3a892;}
+  .mc-list tr.is-cancel td.b{font-weight:500;}
+  .mc-cancel{display:inline-block;font-size:10px;font-weight:900;letter-spacing:.06em;color:#fff;background:#a04040;padding:2px 7px;border-radius:4px;white-space:nowrap;}
+  .mc-empty{font-size:12.5px;padding:14px 4px;text-align:center;border:1px dashed #dfe3c6;border-radius:8px;color:#66714c;margin-bottom:26px;}
+  .mc-empty.last{margin-bottom:0;}
+
+  .note{font-size:11px;color:var(--ink-soft);margin-top:10px;line-height:1.9;}
+  .sheetmsg{font-size:13px;line-height:1.9;}
+  .sheetmsg .bad{color:var(--danger);font-weight:700;}
+  .sheetmsg .sm{font-size:12px;color:var(--ink-soft);}
+  .toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);background:var(--green-dark);color:#fff;font-size:13px;padding:11px 22px;border-radius:99px;opacity:0;pointer-events:none;transition:.3s;z-index:99;}
+  .toast.show{opacity:1;}
+  @media (max-width:640px){
+    input[type=number]{width:92px;}
+    h1{font-size:22px;}
+    .total-bar .big{font-size:20px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="masthead">
+    <div class="eyebrow">GUEST LIST &amp; REWARD</div>
+    <h1>【ミサキカク毎週公演】集客・報酬カード作成ツール</h1>
+    <p class="sub">来場者リストと配信購入リストのExcelを入れると、出演者ごとの集客数が自動で入ります。プランなどを入力すると、集客リストと精算をまとめた1枚のカードを保存できます(2026年8〜12月プラン対応)。</p>
+  </div>
+
+  <label class="dz" id="dz">
+    <input type="file" id="fileInput" accept=".xlsx,.xls" multiple>
+    <div class="big">Excelファイルをここにドロップ(クリックでも選択できます)</div>
+    <div class="small">
+      「来場者リスト」と「配信購入リスト」の2ファイルをまとめて入れてOK。列名から自動で判別します。<br>
+      来場者=「扱い」列 / 配信=「アンケート回答」列 を出演者名として集計します。データはブラウザ内だけで処理されます。
+    </div>
+    <div class="filestate">
+      <span class="fchip" id="chipVenue"><span class="dot"></span><span>来場者リスト:未読込</span></span>
+      <span class="fchip" id="chipStream"><span class="dot"></span><span>配信購入リスト:未読込</span></span>
+    </div>
+    <div id="loadStatus"></div>
+  </label>
+
+  <div class="panel">
+    <h2>イベント設定</h2>
+    <div class="settings-grid">
+      <div class="field"><label>イベント名</label><input type="text" id="evName" placeholder="例) ○○公演 vol.12" style="width:220px"></div>
+      <div class="field"><label>開催日</label><input type="date" id="evDate" style="width:160px"></div>
+      <div class="field"><label>チケット単価(円)</label><input type="number" id="ticketPrice" value="2800" min="0"></div>
+      <div class="field"><label>ブロマイド単価(円)</label><input type="number" id="bromidePrice" value="500" min="0"></div>
+      <div class="field"><label>出演者以外の集客(主催・作者集客など)</label><input type="number" id="extraAudience" value="0" min="0"></div>
+    </div>
+    <p class="note" style="margin-top:12px;">
+      ※ Excelを入れると、出演者名が一致する行は会場・配信チケット数を上書きします(プランやブロマイドなどの入力は残ります)。一致しない名前は新規出演者(プラン1)として追加します。<br>
+      ※ 出演者名が「（扱いなし）」「指定なし」の集客は「出演者以外の集客」欄にまとめて入力します。<br>
+      ※ イベント名・開催日は、手で入力していない場合のみExcelの内容で自動補完します。
+    </p>
+  </div>
+
+  <div class="panel hidden" id="sheetPanel">
+    <h2>スプレッドシートから受け取った内容</h2>
+    <div class="sheetmsg" id="sheetMsg"></div>
+  </div>
+
+  <div class="total-bar">
+    <div><div class="lbl">全体集客</div><div class="big" id="totalAudience">0<span style="font-size:14px">名</span></div></div>
+    <div><div class="lbl">全体50名インセンティブ</div><div class="big" id="fiftyStatus" style="font-size:16px">未達成</div></div>
+    <div><div class="lbl">売上合計</div><div class="big" id="totalSales" style="font-size:19px">¥0</div></div>
+    <div><div class="lbl">支払額合計</div><div class="big" id="totalPay" style="font-size:19px">¥0</div></div>
+  </div>
+
+  <div class="split">
+    <div class="split-l">
+      <div id="performers"></div>
+      <div class="toolbar">
+        <button class="btn ghost" id="addBtn" onclick="addPerformer()">＋ 出演者を追加</button>
+        <button class="btn ghost small" onclick="saveCsv()">CSVで集計を保存</button>
+        <button class="btn quiet small" onclick="location.reload()">リセット</button>
+      </div>
+    </div>
+    <div class="split-r">
+      <div class="pv">
+        <div class="pv-head">
+          <span class="t">プレビュー</span>
+          <button class="btn small" onclick="exportAllCards()" id="bulkBtn">全員分を一括保存 (PNG)</button>
+        </div>
+        <div class="pv-tabs" id="pvTabs"></div>
+        <div id="cardsGrid"></div>
+        <p class="note">入力欄を触ると、その出演者のカードに切り替わります。カードを押すと拡大します。保存される画像は横2,840pxの大きさです。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel" style="padding:16px 20px;margin-top:24px;">
+    <h2 style="margin-bottom:4px;">管理者用 全体集計表(自分用)</h2>
+    <p class="note" style="margin:0 0 12px;">全出演者の内訳と合計をまとめた表です。記録用に画像保存もできます。</p>
+    <button class="btn ghost" onclick="exportAdmin()">集計表を画像で保存 (PNG)</button>
+  </div>
+  <div id="adminArea"></div>
+
+  <p class="note">
+    ※ 報酬額は内税。源泉徴収は報酬額(プラス時のみ)×10.21%・小数点以下切り捨てで計算しています。<br>
+    ※ 「調整額(源泉対象)」は報酬額に加算されるため、消費税・源泉徴収の計算に含まれます。<br>
+    ※ 「立替清算など(税・源泉対象外)」は消費税・源泉徴収の対象にせず、源泉徴収後の支払額にそのまま加減算します。交通費などの立替金の清算にお使いください。<br>
+    ※ 「招待客」は全体50名インセンティブのカウント・売上・個人集客の達成カウントには含めず、記録として表示のみします。<br>
+    ※ 「固定ギャラ」は入力した金額がそのまま報酬額(内税)になります(上乗せ・参加費なし)。固定ギャラの人の集客は、「集客を含める」にチェックを入れた場合だけ全体50名インセンティブのカウントに含めます。<br>
+    ※ 報酬額がマイナスの場合(参加費 &gt; 報酬)は源泉徴収なし・出演者からお支払いいただく金額として赤字表示されます。<br>
+    ※ 会場・配信チケットの人数を手で直した場合、カード上部の人数と報酬計算は直した数字を使います(カード右側の名前リストはExcelの内容のままです)。<br>
+    ※ スプレッドシートのメニューから開くと、その週の開催日とブロマイド枚数(会場・発送)を受け取り、同じ名前の出演者に自動で入れます。Excelを入れたあとにも入れ直します(手で直した枚数はその時に上書きされます)。名前はスペースや全角半角の違いを無視して比べます。シートにない名前は「シートに該当なし」と表示するので、手で入力してください。<br>
+    ※ ブラウザを閉じる・再読み込みすると入力内容は消えます。
+  </p>
+</div>
+
+<div class="zoom hidden" id="zoom">
+  <button class="zoom-x" onclick="closeZoom()">× 閉じる</button>
+  <div class="zoom-in" id="zoomIn"></div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ================== プラン定義(2026年8〜12月) ==================
+const PLANS = {
+  first: {label:"初回プラン", type:"percent", color:"#a08a00", bg:"#fdf8d8",
+    base:0.15, fee:0,
+    amtBonus:{n:10, amt:3000}, rateBonusPersonal:{n:15, rate:0.10}, rateBonusTotal:{n:50, rate:0.10}},
+  p1: {label:"プラン1", type:"percent", color:"#2e7d32", bg:"#e9f5e9",
+    base:0.15, fee:5000,
+    amtBonus:{n:5, amt:1000}, rateBonusPersonal:{n:15, rate:0.10}, rateBonusTotal:{n:50, rate:0.05}},
+  p2: {label:"プラン2", type:"percent", color:"#2b3a9e", bg:"#e7ecfb",
+    base:0.20, fee:8000,
+    amtBonus:{n:10, amt:4000}, rateBonusPersonal:{n:15, rate:0.15}, rateBonusTotal:{n:50, rate:0.05}},
+  p3: {label:"プラン3", type:"percent", color:"#b02830", bg:"#fdeaec",
+    base:0.30, fee:6000,
+    amtBonus:{n:10, amt:3000}, rateBonusPersonal:{n:15, rate:0.10}, rateBonusTotal:{n:50, rate:0.05}},
+  p4: {label:"プラン4", type:"percent", color:"#c06018", bg:"#fdefe0",
+    base:0.40, fee:16000,
+    amtBonus:{n:10, amt:10000}, rateBonusPersonal:{n:15, rate:0.05}, rateBonusTotal:{n:50, rate:0.05}},
+  p5a: {label:"プラン5A", type:"gala", color:"#1b5e20", bg:"#dcefdc",
+    fixed:8800, perBromide:165, fee:0,
+    amtBonusPersonal:{n:15, amt:1100}, amtBonusTotal:{n:50, amt:1100}},
+  p5b: {label:"プラン5B", type:"gala", color:"#1a1aa6", bg:"#e2e2f9",
+    fixed:17600, perBromide:220, fee:0,
+    amtBonusPersonal:{n:15, amt:2200}, amtBonusTotal:{n:50, amt:2200}},
+  p5c: {label:"プラン5C", type:"gala", color:"#8e1616", bg:"#f7e1e1",
+    fixed:26400, perBromide:275, fee:0,
+    amtBonusPersonal:{n:25, amt:3300}, amtBonusTotal:{n:50, amt:3300}},
+  p6: {label:"プラン6", type:"none", color:"#4a4a4a", bg:"#e8e8e8", fee:17000},
+  p7: {label:"プラン7", type:"perTicket", color:"#6b6b6b", bg:"#f0f0f0",
+    perTicket:550, perBromide:220, fee:0,
+    amtBonusPersonal:{n:5, amt:5500}},
+  // 固定ギャラ: 出演者ごとに入力した金額がそのまま報酬額(内税)になる。上乗せ・参加費なし。
+  fixed: {label:"固定ギャラ", type:"fixed", color:"#00695c", bg:"#dff2ef", fee:0}
+};
+const PLAN_ORDER = ["first","p1","p2","p3","p4","p5a","p5b","p5c","p6","p7","fixed"];
+const MAX_PERFORMERS = 8;
+const WITHHOLDING = 0.1021;
+const UNASSIGNED_NAMES = ["（扱いなし）", "指定なし", "扱いなし"];
+const CARD_BG = "#fbfaf1";
+
+let performers = [];
+let nextId = 1;
+let venueRows = null;   // 来場者リスト(Excel)
+let streamRows = null;  // 配信購入リスト(Excel)
+// イベント名: 配信の商品名 > 来場者ファイルのシート名 / 開催日: 来場者の予約日 > 配信のイベント日(元の集客リストツールと同じ優先順)
+let eventInfo = {name:"", nameFallback:"", dateIso:"", dateFallbackIso:""};
+
+const $ = id => document.getElementById(id);
+
+// ================== 共通の整形 ==================
+function yen(n){ return "¥" + n.toLocaleString("ja-JP"); }
+function pct(r){ return (Math.round(r*1000)/10) + "%"; }
+function signedYen(n){ return (n>0?"+":"−") + yen(Math.abs(n)); }
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g, m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
+}
+function clean(v){
+  if(v == null) return "";
+  return String(v).replace(/_x000D_/g,"").replace(/\r/g,"").trim();
+}
+function pad2(n){ return String(n).padStart(2,"0"); }
+function dateToIso(d){
+  if(!(d instanceof Date) || isNaN(d)) return "";
+  return `${d.getFullYear()}-${pad2(d.getMonth()+1)}-${pad2(d.getDate())}`;
+}
+// "2026-08-15" → "2026/8/15(土)"(カード・集計表の表示用)
+function fmtDate(iso){
+  if(!iso) return "";
+  const m = String(iso).match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if(!m) return String(iso);
+  const d = new Date(Number(m[1]), Number(m[2])-1, Number(m[3]));
+  const wd = ["日","月","火","水","木","金","土"][d.getDay()];
+  return `${d.getFullYear()}/${d.getMonth()+1}/${d.getDate()}(${wd})`;
+}
+// "2026-08-15" → "2026.08.15"(CSV用。元の集客リストツールと同じ書式)
+function isoToDot(iso){ return iso ? String(iso).replace(/-/g,".") : ""; }
+function today(){
+  const d = new Date();
+  return `${d.getFullYear()}.${pad2(d.getMonth()+1)}.${pad2(d.getDate())}`;
+}
+function toast(msg){
+  const t = $("toast"); t.textContent = msg; t.classList.add("show");
+  clearTimeout(t._tm); t._tm = setTimeout(()=>t.classList.remove("show"), 2600);
+}
+
+// ================== Excelの読み込み ==================
+function sheetToMatrix(wb){
+  const ws = wb.Sheets[wb.SheetNames[0]];
+  return XLSX.utils.sheet_to_json(ws, {header:1, defval:null, raw:true});
+}
+function findHeaderRow(matrix, keys){
+  for(let i=0;i<Math.min(matrix.length,15);i++){
+    const row = (matrix[i]||[]).map(c=>clean(c));
+    if(keys.every(k=>row.includes(k))) return i;
+  }
+  return -1;
+}
+function colIndex(H, name){ return H.findIndex(h => clean(h) === name); }
+
+function parseVenue(matrix){
+  const hi = findHeaderRow(matrix, ["購入者","扱い","購入枚数"]);
+  if(hi < 0) return null;
+  const H = matrix[hi].map(c=>clean(c));
+  const c = {
+    buyer: colIndex(H,"購入者"), kana: colIndex(H,"フリガナ"),
+    perf: colIndex(H,"扱い"), qty: colIndex(H,"購入枚数"), note: colIndex(H,"備考"),
+    resDate: colIndex(H,"予約日")
+  };
+  const out = [];
+  for(let i=hi+1;i<matrix.length;i++){
+    const r = matrix[i]||[];
+    const buyer = clean(r[c.buyer]);
+    if(!buyer) continue;
+    if(c.resDate>=0 && !eventInfo.dateFallbackIso && r[c.resDate] instanceof Date){
+      eventInfo.dateFallbackIso = dateToIso(r[c.resDate]);
+    }
+    const rawQty = clean(r[c.qty]);
+    const cancelled = /キャンセル/i.test(rawQty);
+    out.push({
+      performer: clean(r[c.perf]) || "（扱いなし）",
+      buyer,
+      kana: c.kana>=0 ? clean(r[c.kana]) : "",
+      qty: cancelled ? 0 : (Number(r[c.qty]) || 1),
+      cancelled,
+      note: c.note>=0 ? clean(r[c.note]) : ""
+    });
+  }
+  return out;
+}
+
+function parseStream(matrix){
+  const hi = findHeaderRow(matrix, ["購入者名","アンケート回答"]);
+  if(hi < 0) return null;
+  const H = matrix[hi].map(c=>clean(c));
+  const c = {
+    status: colIndex(H,"ステータス"), product: colIndex(H,"商品名"),
+    qty: colIndex(H,"購入個数"), buyerId: colIndex(H,"購入者ID"),
+    buyerName: colIndex(H,"購入者名"), comment: colIndex(H,"コメント"),
+    perf: colIndex(H,"アンケート回答"), evDate: colIndex(H,"配信日時/イベント日")
+  };
+  const out = [];
+  for(let i=hi+1;i<matrix.length;i++){
+    const r = matrix[i]||[];
+    const buyerName = clean(r[c.buyerName]);
+    if(!buyerName) continue;
+    if(c.status>=0){
+      const st = clean(r[c.status]);
+      if(st && !st.includes("販売")) continue;
+    }
+    if(c.product>=0 && !eventInfo.name){ const pn = clean(r[c.product]); if(pn) eventInfo.name = pn; }
+    if(c.evDate>=0 && !eventInfo.dateIso && r[c.evDate] instanceof Date){ eventInfo.dateIso = dateToIso(r[c.evDate]); }
+    out.push({
+      performer: clean(r[c.perf]) || "（扱いなし）",
+      qty: Number(r[c.qty]) || 1,
+      buyerId: c.buyerId>=0 ? clean(r[c.buyerId]) : "",
+      buyerName,
+      comment: c.comment>=0 ? clean(r[c.comment]) : ""
+    });
+  }
+  return out;
+}
+
+async function handleFiles(files){
+  let loaded = 0;
+  for(const f of files){
+    try{
+      const buf = await f.arrayBuffer();
+      const wb = XLSX.read(buf, {type:"array", cellDates:true});
+      const matrix = sheetToMatrix(wb);
+      const v = parseVenue(matrix);
+      if(v){
+        venueRows = v; loaded++;
+        if(!eventInfo.nameFallback){
+          const sn = clean(wb.SheetNames[0]).split("_")[0];
+          if(sn && !/^(sheet|soldlist)/i.test(sn)) eventInfo.nameFallback = sn;
+        }
+      } else {
+        const s = parseStream(matrix);
+        if(s){ streamRows = s; loaded++; }
+        else toast(`「${f.name}」の形式を判別できませんでした`);
+      }
+    }catch(e){
+      console.error(e);
+      toast(`「${f.name}」の読み込みに失敗しました`);
+    }
+  }
+  if(loaded) syncFromExcel();
+}
+
+// 出演者名ごとに来場者・配信購入者をまとめる
+function aggregateLists(){
+  const map = new Map();
+  const get = p => {
+    if(!map.has(p)) map.set(p, {performer:p, venue:[], stream:[]});
+    return map.get(p);
+  };
+  (venueRows||[]).forEach(r => get(r.performer).venue.push(r));
+  (streamRows||[]).forEach(r => get(r.performer).stream.push(r));
+  map.forEach(a=>{
+    a.venue.sort((x,y)=> (x.kana||x.buyer).localeCompare(y.kana||y.buyer,"ja"));
+    a.vQty = a.venue.reduce((s,r)=>s+r.qty,0);   // 会場 集客数 = 購入枚数の合計
+    a.sQty = a.stream.reduce((s,r)=>s+r.qty,0);  // 配信 集客数 = 購入個数の合計
+  });
+  return map;
+}
+function sortedGroups(map){
+  return [...map.values()].sort((x,y)=>
+    (y.vQty+y.sQty)-(x.vQty+x.sQty) || x.performer.localeCompare(y.performer,"ja"));
+}
+
+// Excelの内容を出演者の入力欄へ反映する
+function syncFromExcel(){
+  const cv = $("chipVenue"), cs = $("chipStream");
+  if(venueRows){ cv.classList.add("ok"); cv.innerHTML = `<span class="dot"></span><span>来場者リスト:${venueRows.length}件 読込済</span>`; }
+  if(streamRows){ cs.classList.add("ok"); cs.innerHTML = `<span class="dot"></span><span>配信購入リスト:${streamRows.length}件 読込済</span>`; }
+
+  let matched=0, added=0, skipped=0, unassigned=0;
+  sortedGroups(aggregateLists()).forEach(a=>{
+    if(UNASSIGNED_NAMES.includes(a.performer)){ unassigned += a.vQty + a.sQty; return; }
+    const exist = performers.find(p => p.name.trim() === a.performer);
+    if(exist){ exist.tVenue = a.vQty; exist.tStream = a.sQty; matched++; }
+    else if(pushPerformer({name:a.performer, plan:"p1", tVenue:a.vQty, tStream:a.sQty})){ added++; }
+    else { skipped++; } // 出演者の上限(8名)に達したため追加できなかった
+  });
+  if(unassigned){ $("extraAudience").value = unassigned; }
+  applySheetData(); // シートから受け取った枚数がある場合は、ここで入れ直す
+
+  // イベント名・開催日は、手で入力していない場合のみ自動補完する
+  const nameEl = $("evName"), dateEl = $("evDate");
+  const autoName = eventInfo.name || eventInfo.nameFallback;
+  const autoDate = eventInfo.dateFallbackIso || eventInfo.dateIso;
+  if(autoName && (!nameEl.value || nameEl.dataset.auto === "1")){ nameEl.value = autoName; nameEl.dataset.auto = "1"; }
+  if(autoDate && (!dateEl.value || dateEl.dataset.auto === "1")){ dateEl.value = autoDate; dateEl.dataset.auto = "1"; }
+
+  renderAll();
+  let msg = `Excelを読み込みました(既存${matched}名を更新/新規${added}名を追加`;
+  if(unassigned) msg += `/扱いなし ${unassigned}名を「出演者以外の集客」に反映`;
+  if(skipped) msg += `/出演者数の上限により${skipped}名を追加できませんでした`;
+  msg += ")";
+  $("loadStatus").textContent = msg;
+}
+
+// ================== スプレッドシートから受け取る(ブロマイド枚数) ==================
+// シートのメニューから開くと、URLの「#d=...」に 開催日・名前・会場/発送の枚数が入って届く
+let sheetData = null;   // {date, rows:[{name,key,bVenue,bShip}]}
+function normKey(s){ return String(s==null?"":s).normalize("NFKC").replace(/\s+/g,"").toLowerCase(); }
+function readSheetHash(){
+  const m = location.hash.match(/^#d=(.+)$/);
+  if(!m) return;
+  try{
+    const d = JSON.parse(decodeURIComponent(m[1]));
+    if(!d || !Array.isArray(d.rows)) throw new Error("形式が違います");
+    sheetData = {
+      date: /^\d{4}-\d{2}-\d{2}$/.test(d.date||"") ? d.date : "",
+      rows: d.rows.map(r=>({
+        name: String(r.name||"").trim(), key: normKey(r.name),
+        bVenue: Math.max(0, Number(r.bVenue)||0), bShip: Math.max(0, Number(r.bShip)||0)
+      })).filter(r=>r.key)
+    };
+    // 名前がURLに残らないよう、受け取ったら消す
+    history.replaceState(null, "", location.pathname + location.search);
+    if(sheetData.date){ const el = $("evDate"); el.value = sheetData.date; el.dataset.auto = ""; }
+  }catch(e){
+    console.error(e); sheetData = null;
+    toast("シートから受け取ったデータを読めませんでした");
+  }
+}
+function findSheetRow(name){
+  const key = normKey(name);
+  return key ? (sheetData.rows.find(r=>r.key===key) || null) : null;
+}
+// 全員分を入れ直す(入力欄は、このあと renderAll で作り直される)
+function applySheetData(){
+  if(!sheetData) return;
+  performers.forEach(p=>{
+    const r = findSheetRow(p.name);
+    if(r){ p.bVenue = r.bVenue; p.bShip = r.bShip; }
+  });
+}
+// 名前を打っている最中の1人分(入力欄の値だけ直接書き換える。フォーカスを外さないため)
+function applySheetToOne(p){
+  if(!sheetData) return;
+  const r = findSheetRow(p.name);
+  if(!r) return;
+  p.bVenue = r.bVenue; p.bShip = r.bShip;
+  const root = document.getElementById("pf-"+p.id);
+  if(!root) return;
+  const setv = (k,v)=>{ const el = root.querySelector(`input[oninput*="'${k}'"]`); if(el) el.value = v; };
+  setv("bVenue", r.bVenue); setv("bShip", r.bShip);
+}
+function renderSheetPanel(){
+  const panel = $("sheetPanel");
+  if(!sheetData){ panel.classList.add("hidden"); return; }
+  panel.classList.remove("hidden");
+  const named = performers.filter(p=>normKey(p.name));
+  const missing = named.filter(p=>!findSheetRow(p.name)).map(p=>p.name.trim());
+  const usedKeys = new Set(named.map(p=>normKey(p.name)));
+  const unused = sheetData.rows.filter(r=>!usedKeys.has(r.key));
+  let h = `<div>${sheetData.date ? escapeHtml(fmtDate(sheetData.date)) + " の分を" : ""}受け取りました(シートの出演者 ${sheetData.rows.length}名)。</div>`;
+  if(!named.length){
+    h += `<div class="sm">出演者がまだいません。Excelを入れると、同じ名前の人にブロマイド枚数が自動で入ります。</div>`;
+  } else {
+    h += missing.length
+      ? `<div><span class="bad">シートに該当なし:</span> ${missing.map(escapeHtml).join("、")} <span class="sm">(ブロマイド枚数は手で入力してください)</span></div>`
+      : `<div>出演者の ${named.length}名すべてに、ブロマイド枚数を入れました。</div>`;
+    if(unused.length) h += `<div class="sm">シートにあるが、ツールの出演者にいない名前: ${unused.map(r=>escapeHtml(r.name)).join("、")}</div>`;
+  }
+  $("sheetMsg").innerHTML = h;
+}
+
+// ================== 出演者の追加・削除・入力 ==================
+function pushPerformer(data){
+  if(performers.length >= MAX_PERFORMERS) return null;
+  const p = Object.assign({
+    id: nextId++, name:"", plan:"p1",
+    tVenue:0, tStream:0, invite:0, bVenue:0, bShip:0, adjust:0, taxfree:0, memo:"",
+    fixedAmt:0, count50:false  // 固定ギャラ用: 報酬額(内税) / 集客を全体50名のカウントに含めるか
+  }, data||{});
+  performers.push(p);
+  return p;
+}
+function addPerformer(data){
+  if(!pushPerformer(data)) return;
+  renderAll();
+}
+function removePerformer(id){
+  performers = performers.filter(p=>p.id!==id);
+  renderAll();
+}
+// 入力中はDOMを作り直さず、計算結果だけを更新する(フォーカスが外れないように)
+function upd(id, key, val){
+  const p = performers.find(x=>x.id===id);
+  if(!p) return;
+  if(key==="name"||key==="plan"||key==="memo"){ p[key]=val; }
+  else if(key==="count50"){ p[key] = !!val; }
+  else { p[key] = Number(val)||0; }
+  if(key==="plan"){ renderAll(); return; } // プランによって入力欄が変わるため作り直す
+  if(key==="name") applySheetToOne(p); // 名前が合えば、シートのブロマイド枚数を入れる
+  refresh();
+}
+
+// ================== 報酬の計算(元の報酬計算ツールと同じ) ==================
+function calc(){
+  const ticketPrice = Number($("ticketPrice").value)||0;
+  const bromidePrice = Number($("bromidePrice").value)||0;
+  const extra = Number($("extraAudience").value)||0;
+
+  // 固定ギャラの人の集客は、チェックを入れた人だけ全体50名のカウントに含める
+  const outOfCount = p => PLANS[p.plan].type === "fixed" && !p.count50;
+  const totalAudience = performers.reduce((s,p)=>s+(outOfCount(p) ? 0 : p.tVenue+p.tStream),0) + extra;
+  const totalUncounted = performers.reduce((s,p)=>s+(outOfCount(p) ? p.tVenue+p.tStream : 0),0);
+  const totalInvite = performers.reduce((s,p)=>s+(p.invite||0),0);
+  const fifty = totalAudience >= 50;
+
+  const rows = performers.map(p=>{
+    const plan = PLANS[p.plan];
+    const audience = p.tVenue + p.tStream;
+    const invite = p.invite || 0;
+    const bromides = p.bVenue + p.bShip;
+    const sales = audience*ticketPrice + bromides*bromidePrice;
+    let base = 0, rate = null, incentives = [], lines = [];
+    if(invite){ lines.push(`招待客 ${invite}名(売上・50名カウント・個人達成カウントには含めません)`); }
+
+    if(plan.type === "percent"){
+      // バック率は「%の整数」で足し合わせる(小数のまま足すと計算誤差でバック額が1円少なくなることがあるため)
+      const toPct = r => Math.round(r * 100);
+      let ratePct = toPct(plan.base);
+      lines.push(`売上 = 集客${audience}名 × ${yen(ticketPrice)} + ブロマイド${bromides}枚 × ${yen(bromidePrice)} = ${yen(sales)}`);
+      let rateParts = [`基本${pct(plan.base)}`];
+      if(audience >= plan.rateBonusPersonal.n){ ratePct += toPct(plan.rateBonusPersonal.rate); rateParts.push(`個人${plan.rateBonusPersonal.n}名達成 +${pct(plan.rateBonusPersonal.rate)}`); }
+      if(fifty){ ratePct += toPct(plan.rateBonusTotal.rate); rateParts.push(`全体${plan.rateBonusTotal.n}名達成 +${pct(plan.rateBonusTotal.rate)}`); }
+      rate = ratePct / 100;
+      base = Math.floor(sales * ratePct / 100);
+      lines.push(`バック率 = ${rateParts.join(" ＋ ")} = ${pct(rate)}`);
+      lines.push(`バック額 = ${yen(sales)} × ${pct(rate)} = ${yen(base)}`);
+      if(audience >= plan.amtBonus.n){
+        incentives.push({label:`個人集客${plan.amtBonus.n}名達成`, amt:plan.amtBonus.amt});
+      }
+    } else if(plan.type === "gala"){
+      base = plan.fixed;
+      lines.push(`定額報酬 = ${yen(plan.fixed)}`);
+      if(bromides > 0){
+        incentives.push({label:`ブロマイド販売 ${bromides}枚 × ${yen(plan.perBromide)}`, amt:bromides*plan.perBromide});
+      }
+      if(audience >= plan.amtBonusPersonal.n){
+        incentives.push({label:`個人集客${plan.amtBonusPersonal.n}名達成`, amt:plan.amtBonusPersonal.amt});
+      }
+      if(fifty){
+        incentives.push({label:`全体集客${plan.amtBonusTotal.n}名達成`, amt:plan.amtBonusTotal.amt});
+      }
+    } else if(plan.type === "perTicket"){
+      base = audience * plan.perTicket;
+      lines.push(`チケット報酬 = ${audience}枚 × ${yen(plan.perTicket)} = ${yen(base)}`);
+      if(bromides > 0){
+        incentives.push({label:`ブロマイド販売 ${bromides}枚 × ${yen(plan.perBromide)}`, amt:bromides*plan.perBromide});
+      }
+      if(audience >= plan.amtBonusPersonal.n){
+        incentives.push({label:`個人集客${plan.amtBonusPersonal.n}名達成`, amt:plan.amtBonusPersonal.amt});
+      }
+    } else if(plan.type === "fixed"){
+      base = p.fixedAmt || 0;
+      lines.push(`固定報酬 = ${yen(base)}`);
+      lines.push(p.count50 ? `集客${audience}名は全体50名のカウントに含めます` : `集客${audience}名は全体50名のカウントに含めません`);
+    } else {
+      lines.push("報酬 0円(集客不問プラン)");
+    }
+
+    const incTotal = incentives.reduce((s,i)=>s+i.amt,0);
+    incentives.forEach(i=>lines.push(`Incentive: ${i.label} = +${yen(i.amt)}`));
+    if(p.adjust){ lines.push(`調整額(源泉対象) = ${signedYen(p.adjust)}`); }
+    if(plan.fee){ lines.push(`参加費 = −${yen(plan.fee)}`); }
+
+    const reward = base + incTotal + p.adjust - plan.fee;
+    // 報酬額は消費税込みの想定(内税10%)。参考として税額を表示用に算出(報酬額×10/110、1円未満切り捨て)。
+    const consumptionTax = reward > 0 ? Math.floor(reward * 10 / 110) : 0;
+    const tax = reward > 0 ? Math.floor(reward * WITHHOLDING) : 0;
+    const taxfree = p.taxfree || 0;
+    const pay = reward - tax + taxfree;
+    lines.push(`報酬額(内税) = ${yen(reward)}`);
+    if(consumptionTax){ lines.push(`(うち消費税10%相当 = ${yen(consumptionTax)})`); }
+    lines.push(reward>0 ? `源泉徴収 = ${yen(reward)} × 10.21% = ${yen(tax)}(切り捨て)` : `源泉徴収 = なし(報酬額が0円以下のため)`);
+    if(taxfree){ lines.push(`立替清算など(税・源泉対象外) = ${signedYen(taxfree)}`); }
+    lines.push(`支払額 = ${yen(pay)}${pay<0 ? "(出演者からのお支払い)" : ""}`);
+
+    return {p, plan, audience, invite, bromides, sales, rate, base, incentives, incTotal, reward, consumptionTax, tax, taxfree, pay, lines};
+  });
+
+  return {rows, totalAudience, totalInvite, totalUncounted, fifty,
+    totalSales: rows.reduce((s,r)=>s+r.sales,0),
+    totalReward: rows.reduce((s,r)=>s+r.reward,0),
+    totalTax: rows.reduce((s,r)=>s+r.tax,0),
+    totalTaxfree: rows.reduce((s,r)=>s+r.taxfree,0),
+    totalPay: rows.reduce((s,r)=>s+r.pay,0)};
+}
+
+// ================== 描画 ==================
+// renderAll: 出演者の追加/削除/Excel読込時のみ(入力欄ごと作り直す)
+// refresh:   入力のたびに呼ばれる(入力欄は触らず、結果表示だけ更新)
+function renderAll(){
+  renderPerformerInputs();
+  refresh();
+}
+
+function refresh(){
+  const c = calc();
+  $("totalAudience").innerHTML =
+    c.totalAudience + '<span style="font-size:14px">名</span>' +
+    (c.totalInvite ? `<span style="font-size:12px;opacity:.75;font-weight:500"> ＋招待${c.totalInvite}名(カウント外)</span>` : "") +
+    (c.totalUncounted ? `<span style="font-size:12px;opacity:.75;font-weight:500"> ＋固定ギャラ分${c.totalUncounted}名(カウント外)</span>` : "");
+  const fs = $("fiftyStatus");
+  fs.textContent = c.fifty ? "達成" : "未達成(あと" + (50-c.totalAudience) + "名)";
+  fs.className = "big " + (c.fifty ? "ok" : "");
+  fs.style.fontSize = "16px";
+  $("totalSales").textContent = yen(c.totalSales);
+  $("totalPay").textContent = yen(c.totalPay);
+  $("addBtn").disabled = performers.length >= MAX_PERFORMERS;
+  $("bulkBtn").disabled = performers.length === 0;
+
+  c.rows.forEach(r=>{
+    const res = $("res-"+r.p.id);
+    if(res) res.innerHTML = resultHtml(r);
+    const bd = $("bd-"+r.p.id);
+    if(bd) bd.innerHTML = r.lines.map(escapeHtml).join("<br>");
+    const chip = $("chip-"+r.p.id);
+    if(chip){
+      chip.textContent = r.plan.label;
+      chip.style.color = r.plan.color;
+      chip.style.background = r.plan.bg;
+    }
+  });
+
+  renderCards(c);
+  renderAdmin(c);
+  renderSheetPanel();
+}
+
+function planOptions(sel){
+  return PLAN_ORDER.map(k=>`<option value="${k}" ${k===sel?"selected":""}>${PLANS[k].label}</option>`).join("");
+}
+
+function renderPerformerInputs(){
+  $("performers").innerHTML = performers.map(p=>{
+    const plan = PLANS[p.plan];
+    return `
+    <div class="performer" id="pf-${p.id}">
+      <div class="performer-head">
+        <input type="text" placeholder="出演者名" value="${escapeHtml(p.name)}" oninput="upd(${p.id},'name',this.value)">
+        <select onchange="upd(${p.id},'plan',this.value)">${planOptions(p.plan)}</select>
+        <span class="plan-chip" id="chip-${p.id}" style="color:${plan.color};background:${plan.bg}">${plan.label}</span>
+        <button class="btn del" onclick="removePerformer(${p.id})">削除</button>
+      </div>
+      <div class="inputs-row">
+        ${plan.type === "fixed" ? `<div class="field"><label>固定報酬額(円・内税)</label><input type="number" min="0" value="${p.fixedAmt}" oninput="upd(${p.id},'fixedAmt',this.value)"></div>
+        <div class="field"><label>全体50名のカウント</label><label class="check"><input type="checkbox" ${p.count50?"checked":""} onchange="upd(${p.id},'count50',this.checked)">集客を含める</label></div>` : ""}
+        <div class="field"><label>会場チケット(名)</label><input type="number" min="0" value="${p.tVenue}" oninput="upd(${p.id},'tVenue',this.value)"></div>
+        <div class="field"><label>配信チケット(名)</label><input type="number" min="0" value="${p.tStream}" oninput="upd(${p.id},'tStream',this.value)"></div>
+        <div class="field"><label>招待客(名・50名カウント外)</label><input type="number" min="0" value="${p.invite}" oninput="upd(${p.id},'invite',this.value)"></div>
+        <div class="field"><label>ブロマイド会場(枚)</label><input type="number" min="0" value="${p.bVenue}" oninput="upd(${p.id},'bVenue',this.value)"></div>
+        <div class="field"><label>ブロマイド発送(枚)</label><input type="number" min="0" value="${p.bShip}" oninput="upd(${p.id},'bShip',this.value)"></div>
+        <div class="field"><label>調整額(±円・源泉対象)</label><input type="number" value="${p.adjust}" oninput="upd(${p.id},'adjust',this.value)"></div>
+        <div class="field"><label>立替清算など(±円・税/源泉対象外)</label><input type="number" value="${p.taxfree}" oninput="upd(${p.id},'taxfree',this.value)"></div>
+        <div class="field memo"><label>備考(カード・集計表に表示されます)</label><input type="text" placeholder="例) 交通費立替分を精算 / 物販売上は別途" value="${escapeHtml(p.memo)}" oninput="upd(${p.id},'memo',this.value)"></div>
+      </div>
+      <div class="result-row" id="res-${p.id}"></div>
+      <details class="breakdown"><summary>計算内訳を見る</summary><div class="bd" id="bd-${p.id}"></div></details>
+    </div>`;
+  }).join("");
+}
+
+function resultHtml(r){
+  return `
+    <span class="kv"><span class="k">個人集客</span><span class="v">${r.audience}名</span></span>
+    ${r.invite ? `<span class="kv"><span class="k">招待</span><span class="v">${r.invite}名</span></span>` : ""}
+    <span class="kv"><span class="k">売上</span><span class="v">${yen(r.sales)}</span></span>
+    ${r.rate!==null ? `<span class="kv"><span class="k">バック率</span><span class="v">${pct(r.rate)}</span></span>` : ""}
+    <span class="kv"><span class="k">報酬額</span><span class="v">${yen(r.reward)}</span></span>
+    <span class="kv"><span class="k">源泉</span><span class="v">−${yen(r.tax)}</span></span>
+    ${r.taxfree ? `<span class="kv"><span class="k">立替等(税外)</span><span class="v">${signedYen(r.taxfree)}</span></span>` : ""}
+    <span class="kv"><span class="k">支払額</span><span class="pay ${r.pay<0?"neg":""}">${yen(r.pay)}</span></span>`;
+}
+
+// ===== カードの部品 =====
+function rowKV(k,v){ return `<tr><td class="k">${k}</td><td class="v">${v}</td></tr>`; }
+
+function headHtml(evName, evDate, nameHtml){
+  return `
+    <div class="mc-hd">
+      <div>
+        <div class="mc-ev">${escapeHtml(evName)}${evDate ? "　" + escapeHtml(evDate) : ""}</div>
+        <div class="mc-nm">${nameHtml}</div>
+      </div>
+      <span class="mc-mt">作成日 ${today()}</span>
+    </div>`;
+}
+function statsHtml(v, s){
+  return `
+    <div class="mc-st">
+      <div><span class="lb">会 場</span><span class="vl">${v}<span>名</span></span></div>
+      <div class="hot"><span class="lb">配 信</span><span class="vl">${s}<span>名</span></span></div>
+      <div class="sum"><span class="lb">合 計</span><span class="vl">${v+s}<span>名</span></span></div>
+    </div>`;
+}
+// 右側の集客表(会場 来場者 / 配信 購入者)
+function listsHtml(L){
+  const cg = '<colgroup><col style="width:6%"><col style="width:27%"><col style="width:23%"><col style="width:12%"><col style="width:32%"></colgroup>';
+  const venue = L.venue.length ? `
+    <table class="mc-list">${cg}
+      <thead><tr><th></th><th>購入者</th><th>フリガナ</th><th class="num">枚数</th><th>備考</th></tr></thead>
+      <tbody>${L.venue.map((r,j)=>`<tr${r.cancelled?' class="is-cancel"':""}>
+        <td class="idx">${j+1}</td>
+        <td class="b">${escapeHtml(r.buyer)}</td>
+        <td class="d">${escapeHtml(r.kana)}</td>
+        <td class="num">${r.cancelled?'<span class="mc-cancel">キャンセル</span>':r.qty}</td>
+        <td class="c">${escapeHtml(r.note)}</td>
+      </tr>`).join("")}</tbody>
+    </table>` : `<div class="mc-empty">会場チケットの購入はありません</div>`;
+  const stream = L.stream.length ? `
+    <table class="mc-list last">${cg}
+      <thead><tr><th></th><th>購入者名</th><th>購入者ID</th><th class="num">個数</th><th>コメント</th></tr></thead>
+      <tbody>${L.stream.map((r,j)=>`<tr>
+        <td class="idx">${j+1}</td>
+        <td class="b">${escapeHtml(r.buyerName)}</td>
+        <td class="d">${escapeHtml(r.buyerId)}</td>
+        <td class="num">${r.qty}</td>
+        <td class="c">${escapeHtml(r.comment)}</td>
+      </tr>`).join("")}</tbody>
+    </table>` : `<div class="mc-empty last">配信チケットの購入はありません</div>`;
+  return `
+    <div class="mc-gl">
+      <span class="mc-sec venue">会場 来場者</span>
+      ${venue}
+      <span class="mc-sec stream">配信 購入者</span>
+      ${stream}
+    </div>`;
+}
+// 左側の精算表
+function rewardHtml(r){
+  const small = t => ` <span class="s">${t}</span>`;
+  const rows = [];
+  if(r.invite) rows.push(rowKV("招待客", `${r.invite}名${small("(集客カウント外)")}`));
+  rows.push(rowKV("ブロマイド", `${r.bromides}枚${small(`(会場${r.p.bVenue}/発送${r.p.bShip})`)}`));
+  if(r.plan.type === "percent"){
+    rows.push(rowKV("売上", yen(r.sales)));
+    rows.push(rowKV("バック率", pct(r.rate)));
+    rows.push(rowKV("バック額", yen(r.base)));
+  } else if(r.plan.type === "gala"){
+    rows.push(rowKV("定額報酬", yen(r.plan.fixed)));
+  } else if(r.plan.type === "fixed"){
+    rows.push(rowKV("固定報酬", yen(r.base)));
+  } else if(r.plan.type === "perTicket"){
+    rows.push(rowKV(`チケット報酬(${yen(r.plan.perTicket)}/枚)`, yen(r.base)));
+  }
+  r.incentives.forEach(i=>rows.push(rowKV("＋ " + i.label, "+" + yen(i.amt))));
+  if(r.p.adjust) rows.push(rowKV("調整額(源泉対象)", signedYen(r.p.adjust)));
+  if(r.plan.fee) rows.push(rowKV("参加費(後清算)", "−" + yen(r.plan.fee)));
+  rows.push(`<tr class="sect"><td class="k" style="color:#2b2333">報酬額(内税)</td><td class="v">${yen(r.reward)}</td></tr>`);
+  if(r.consumptionTax) rows.push(rowKV("うち消費税(10%)", yen(r.consumptionTax)));
+  rows.push(rowKV("源泉徴収(10.21%)", r.tax ? "−"+yen(r.tax) : "—"));
+  if(r.taxfree) rows.push(rowKV("立替清算など(税・源泉対象外)", signedYen(r.taxfree)));
+
+  return `
+    <div class="mc-rw">
+      <div class="mc-rw-h">
+        <span class="mc-sec">報酬</span>
+        <span class="mc-plan" style="color:${r.plan.color};background:${r.plan.bg}">${r.plan.label}</span>
+      </div>
+      <table><tbody>${rows.join("")}</tbody></table>
+      ${r.reward > 0 ? `<div class="mc-pay inv">
+        <span class="k">報酬額(内税)<span class="n">請求書の明細にはこの金額をご記入ください</span></span>
+        <span class="v">${yen(r.reward)}</span>
+      </div>` : ""}
+      <div class="mc-pay">
+        <span class="k">${r.pay<0 ? "お支払いいただく金額" : `お振込み金額<span class="n">源泉徴収を差し引いた金額です</span>`}</span>
+        <span class="v ${r.pay<0?"neg":""}">${yen(Math.abs(r.pay))}</span>
+      </div>
+      ${r.p.memo ? `<div class="mc-memo"><span class="mk">備考</span>${escapeHtml(r.p.memo)}</div>` : ""}
+      <div class="mc-ft">※ 報酬額は内税です。源泉徴収(10.21%)を差し引いた金額をお支払いします。${r.taxfree ? "<br>※ 立替清算などの税外調整は、消費税・源泉徴収の対象外として源泉徴収後に加減算しています。" : ""}${r.pay<0 ? "<br>※ 参加費が報酬を上回ったため、差額をお支払いいただく形になります。" : ""}<br>※ 支払いは出演日の翌月末を予定しています。(土日祝の場合、翌平日となることがあります)<br>※ ミサキカクからの年間の支払い金額が50,000円以下の場合は原則支払調書は作成しません。必要な方は平野までご連絡ください。${r.reward > 0 ? "<br>※ 請求書の発行をお願いいたします。出演日の翌月25日頃までを目安にご提出ください。" : ""}</div>
+    </div>`;
+}
+
+// ===== 出演者ごとの共有カード(左:精算 / 右:集客リスト) =====
+// 全員分のカードを作っておき、右のプレビューには選んだ1枚だけを見せる(一括保存は全員分を使う)
+let currentKey = null;   // "p:出演者ID" または "s:扱いなしの番号"
+let soloGroups = [];
+
+function renderCards(c){
+  const evName = $("evName").value || "公演";
+  const evDate = fmtDate($("evDate").value);
+  const lists = aggregateLists();
+  const grid = $("cardsGrid");
+  soloGroups = sortedGroups(lists).filter(a => UNASSIGNED_NAMES.includes(a.performer));
+
+  const perfHtml = c.rows.map(r=>{
+    const L = lists.get(r.p.name.trim()) || {venue:[], stream:[]};
+    return `
+    <div class="card-slot" data-key="p:${r.p.id}">
+      <div class="card-tools">
+        <span class="who">${escapeHtml(r.p.name) || "—"} 様</span>
+        <button class="btn ghost small" onclick="exportCard(${r.p.id})">このカードを保存 (PNG)</button>
+      </div>
+      <div class="stage" onclick="openZoom(this)" title="押すと拡大します">
+        <div class="mc" id="card-${r.p.id}">
+          ${headHtml(evName, evDate, `${escapeHtml(r.p.name) || "—"} 様`)}
+          ${statsHtml(r.p.tVenue, r.p.tStream)}
+          <div class="mc-bd">
+            ${rewardHtml(r)}
+            ${listsHtml(L)}
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }).join("");
+
+  // 出演者の指定がない集客(精算なしのカード)
+  const soloHtml = soloGroups.map((a,i)=>`
+    <div class="card-slot" data-key="s:${i}">
+      <div class="card-tools">
+        <span class="who">${escapeHtml(a.performer)}</span>
+        <button class="btn ghost small" onclick="exportSolo(${i})">このカードを保存 (PNG)</button>
+      </div>
+      <div class="stage" onclick="openZoom(this)" title="押すと拡大します">
+        <div class="mc solo" id="solo-${i}" data-name="${escapeHtml(a.performer)}">
+          ${headHtml(evName, evDate, `${escapeHtml(a.performer)}<small>集客リスト</small>`)}
+          ${statsHtml(a.vQty, a.sQty)}
+          <div class="mc-bd">${listsHtml(a)}</div>
+        </div>
+      </div>
+      <p class="note">出演者の指定がないお客さまのリストです。精算は入りません。一括保存には含まれません。</p>
+    </div>`).join("");
+
+  grid.innerHTML = (perfHtml + soloHtml) ||
+    `<div class="empty-note">Excelを入れるか出演者を追加すると、ここにカードが表示されます。</div>`;
+
+  // 名前ボタン
+  $("pvTabs").innerHTML =
+    c.rows.map(r=>`<button type="button" class="pv-tab" data-key="p:${r.p.id}" onclick="selectCard('p:${r.p.id}')">${escapeHtml(r.p.name) || "(名前なし)"}</button>`).join("") +
+    soloGroups.map((a,i)=>`<button type="button" class="pv-tab solo" data-key="s:${i}" onclick="selectCard('s:${i}')">${escapeHtml(a.performer)}</button>`).join("");
+
+  applySelection();
+}
+
+// 選んでいるカードだけを見せる
+function applySelection(){
+  const keys = performers.map(p=>"p:"+p.id).concat(soloGroups.map((a,i)=>"s:"+i));
+  if(!keys.includes(currentKey)) currentKey = keys.length ? keys[0] : null;
+  document.querySelectorAll("#cardsGrid .card-slot").forEach(el=>el.classList.toggle("hidden", el.dataset.key !== currentKey));
+  document.querySelectorAll("#pvTabs .pv-tab").forEach(el=>el.classList.toggle("on", el.dataset.key === currentKey));
+  document.querySelectorAll("#performers .performer").forEach(el=>el.classList.toggle("is-current", "p:"+el.id.slice(3) === currentKey));
+  fitCards();
+}
+function selectCard(key){
+  if(key === currentKey) return;
+  currentKey = key;
+  applySelection();
+}
+
+// 画面ではカードを枠の幅に合わせて縮小表示する(保存時は原寸に戻す)
+function fitCards(){
+  document.querySelectorAll(".stage").forEach(stage=>{
+    const card = stage.firstElementChild;
+    if(!card || !stage.clientWidth) return; // 隠れているカードは、表示するときに合わせる
+    const k = Math.min(1, stage.clientWidth / card.offsetWidth);
+    card.style.transform = k < 1 ? `scale(${k})` : "none";
+    stage.style.height = Math.ceil(card.offsetHeight * k) + "px";
+  });
+}
+
+// ===== 拡大表示(カードを押すと実物大で見られる) =====
+function openZoom(stage){
+  const card = stage.firstElementChild;
+  if(!card) return;
+  const w = card.offsetWidth, h = card.offsetHeight;
+  const k = Math.min(1, (window.innerWidth - 48) / w); // 画面が狭いときだけ、幅に収まるよう縮める
+  const clone = card.cloneNode(true);
+  clone.removeAttribute("id");
+  clone.style.transform = k < 1 ? `scale(${k})` : "none";
+  const box = $("zoomIn");
+  box.innerHTML = "";
+  box.style.width = Math.floor(w * k) + "px";
+  box.style.height = Math.floor(h * k) + "px";
+  box.appendChild(clone);
+  $("zoom").classList.remove("hidden");
+  $("zoom").scrollTop = 0;
+  document.body.style.overflow = "hidden";
+}
+function closeZoom(){
+  $("zoom").classList.add("hidden");
+  $("zoomIn").innerHTML = "";
+  document.body.style.overflow = "";
+}
+
+// ===== 管理者用集計表 =====
+function renderAdmin(c){
+  const name = $("evName").value || "公演";
+  const date = fmtDate($("evDate").value);
+  if(!performers.length){
+    $("adminArea").innerHTML = `<div class="empty-note">Excelを入れるか出演者を追加すると、ここに全体集計表が表示されます。</div>`;
+    return;
+  }
+  $("adminArea").innerHTML = `
+    <div class="share-title">${escapeHtml(name)} 全体集計表</div>
+    <div class="share-date">${escapeHtml(date)}</div>
+    <div class="share-total">全体集客: <b>${c.totalAudience}名</b>${c.totalInvite ? ` ＋招待${c.totalInvite}名(カウント外)` : ""}${c.totalUncounted ? ` ＋固定ギャラ分${c.totalUncounted}名(カウント外)` : ""}(全体50名インセンティブ: ${c.fifty ? "達成" : "未達成"})</div>
+    <table class="share">
+      <thead><tr>
+        <th>出演者</th><th>プラン</th><th>集客<br>(会場/配信)</th><th>ブロマイド<br>(会場/発送)</th>
+        <th>売上</th><th>バック率</th><th>Incentive</th><th>参加費</th><th>報酬額<br>(内税)</th><th>源泉徴収<br>(10.21%)</th><th>立替等<br>(税外)</th><th>支払額</th><th>備考</th>
+      </tr></thead>
+      <tbody>
+      ${c.rows.map(r=>`
+        <tr>
+          <td>${escapeHtml(r.p.name)||"—"}</td>
+          <td><span style="color:${r.plan.color};font-weight:700">${r.plan.label}</span></td>
+          <td>${r.audience}名 (${r.p.tVenue}/${r.p.tStream})${r.invite ? `<br>招待${r.invite}名` : ""}</td>
+          <td>${r.bromides}枚 (${r.p.bVenue}/${r.p.bShip})</td>
+          <td>${yen(r.sales)}</td>
+          <td>${r.rate!==null?pct(r.rate):"—"}</td>
+          <td>${r.incTotal? "+"+yen(r.incTotal):"—"}${r.p.adjust? "<br>調整 "+signedYen(r.p.adjust):""}</td>
+          <td>${r.plan.fee? "−"+yen(r.plan.fee):"—"}</td>
+          <td>${yen(r.reward)}</td>
+          <td>${r.tax? "−"+yen(r.tax):"—"}</td>
+          <td>${r.taxfree? signedYen(r.taxfree):"—"}</td>
+          <td class="paycell ${r.pay<0?"neg":""}">${yen(r.pay)}</td>
+          <td class="memocell">${escapeHtml(r.p.memo)||"—"}</td>
+        </tr>`).join("")}
+        <tr class="totalrow">
+          <td colspan="2">合計</td>
+          <td>${c.rows.reduce((s,r)=>s+r.audience,0)}名${c.totalInvite ? `<br>招待${c.totalInvite}名` : ""}</td>
+          <td>${c.rows.reduce((s,r)=>s+r.bromides,0)}枚</td>
+          <td>${yen(c.totalSales)}</td>
+          <td>—</td><td>—</td>
+          <td>${(()=>{const f=c.rows.reduce((s,r)=>s+(r.plan.fee||0),0);return f? "−"+yen(f):"—";})()}</td>
+          <td>${yen(c.totalReward)}</td>
+          <td>−${yen(c.totalTax)}</td>
+          <td>${c.totalTaxfree? signedYen(c.totalTaxfree):"—"}</td>
+          <td class="paycell ${c.totalPay<0?"neg":""}">${yen(c.totalPay)}</td>
+          <td>—</td>
+        </tr>
+      </tbody>
+    </table>`;
+}
+
+// ================== 画像・CSVの保存 ==================
+function fileSafe(s){ return String(s).replace(/[\\/:*?"<>|]/g,"_"); }
+// ファイル名向けの金額表記(円マークなし・マイナスは「-」)
+function yenForFile(n){ return (n<0?"-":"") + Math.abs(n).toLocaleString("ja-JP") + "円"; }
+function cardFileName(ev, r){
+  return fileSafe(`${ev}_${r.p.name||"出演者"+r.p.id}様_${yenForFile(r.pay)}.png`);
+}
+function downloadBlob(blob, filename){
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href), 4000);
+}
+async function capture(el, filename, bg){
+  if(document.fonts && document.fonts.ready){ try{ await document.fonts.ready; }catch(e){} }
+  const canvas = await html2canvas(el, {
+    scale:2, backgroundColor:bg||"#ffffff", useCORS:true,
+    windowWidth: Math.max(window.innerWidth, 1500),
+    // 画面上の縮小表示を解除して、原寸(横1420px)で画像にする
+    onclone: doc => {
+      doc.querySelectorAll(".mc").forEach(c=>{ c.style.transform = "none"; });
+      doc.querySelectorAll(".stage").forEach(s=>{ s.style.height = "auto"; s.style.overflow = "visible"; });
+      // プレビューで隠しているカードも画像にできるよう、複製側では全部見せる
+      doc.querySelectorAll(".card-slot.hidden").forEach(s=>s.classList.remove("hidden"));
+      const r = doc.querySelector(".split-r");
+      if(r){ r.style.position = "static"; r.style.maxHeight = "none"; r.style.overflow = "visible"; }
+      const z = doc.getElementById("zoom"); if(z) z.remove();
+      // 全体集計表は、画面の広さに関係なく今までと同じ横幅(1100px)で画像にする
+      const ad = doc.getElementById("adminArea"); if(ad) ad.style.width = "1100px";
+    }
+  });
+  return new Promise(res=>{
+    canvas.toBlob(blob=>{ downloadBlob(blob, filename); res(); }, "image/png");
+  });
+}
+async function exportCard(id){
+  const el = $("card-"+id);
+  const ev = $("evName").value || "公演";
+  const r = calc().rows.find(x=>x.p.id===id);
+  toast("画像を生成中…");
+  await capture(el, r ? cardFileName(ev, r) : fileSafe(`${ev}_出演者_報酬.png`), CARD_BG);
+  toast("保存しました");
+}
+async function exportAllCards(){
+  const ev = $("evName").value || "公演";
+  const rows = calc().rows;
+  const btn = $("bulkBtn");
+  btn.disabled = true;
+  for(let i=0;i<rows.length;i++){
+    const r = rows[i];
+    const el = $("card-"+r.p.id);
+    if(!el) continue;
+    toast(`生成中… ${i+1} / ${rows.length}`);
+    await capture(el, cardFileName(ev, r), CARD_BG);
+    await new Promise(res=>setTimeout(res, 400)); // ダウンロードが重ならないよう少し待つ
+  }
+  btn.disabled = false;
+  toast(`${rows.length}名分のカードを保存しました`);
+}
+async function exportSolo(i){
+  const el = $("solo-"+i);
+  const ev = $("evName").value || "公演";
+  toast("画像を生成中…");
+  await capture(el, fileSafe(`${ev}_${el.dataset.name}_集客リスト.png`), CARD_BG);
+  toast("保存しました");
+}
+async function exportAdmin(){
+  const ev = $("evName").value || "公演";
+  toast("画像を生成中…");
+  await capture($("adminArea"), fileSafe(`${ev}_全体集計表.png`), "#ffffff");
+  toast("集計表を保存しました");
+}
+
+// 集客集計CSV(元の集客リスト画像化ツールと同じ列: 日付・イベント・出演者・会場・配信・合計)
+function saveCsv(){
+  const evD = isoToDot($("evDate").value);
+  const evN = $("evName").value || "";
+  const rows = performers.map(p=>({name:p.name.trim() || "出演者"+p.id, v:p.tVenue, s:p.tStream}))
+    .sort((x,y)=> (y.v+y.s)-(x.v+x.s) || x.name.localeCompare(y.name,"ja"));
+  sortedGroups(aggregateLists()).filter(a=>UNASSIGNED_NAMES.includes(a.performer))
+    .forEach(a=>rows.push({name:a.performer, v:a.vQty, s:a.sQty}));
+  if(!rows.length){ toast("保存できるデータがありません"); return; }
+  let tv=0, ts=0;
+  const lines = [["日付","イベント","出演者","会場","配信","合計"]];
+  rows.forEach(r=>{ tv+=r.v; ts+=r.s; lines.push([evD, evN, r.name, r.v, r.s, r.v+r.s]); });
+  lines.push(["", "", "合計", tv, ts, tv+ts]);
+  const csv = "﻿" + lines.map(r=>r.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(",")).join("\r\n");
+  downloadBlob(new Blob([csv],{type:"text/csv"}), `${(evD||today()).replace(/\./g,"")}_集客集計.csv`);
+  toast("CSVを保存しました");
+}
+
+// ================== イベントの結び付け ==================
+const dz = $("dz"), fileInput = $("fileInput");
+dz.addEventListener("dragover", e=>{ e.preventDefault(); dz.classList.add("over"); });
+dz.addEventListener("dragleave", ()=>dz.classList.remove("over"));
+dz.addEventListener("drop", e=>{
+  e.preventDefault(); dz.classList.remove("over");
+  handleFiles([...e.dataTransfer.files].filter(f=>/\.xlsx?$/i.test(f.name)));
+});
+fileInput.addEventListener("change", e=>{ handleFiles([...e.target.files]); e.target.value = ""; });
+
+["evName","evDate","ticketPrice","bromidePrice","extraAudience"].forEach(id=>{
+  $(id).addEventListener("input", ()=>{
+    if(id==="evName"||id==="evDate") $(id).dataset.auto = ""; // 手で入力したら自動補完の対象から外す
+    refresh();
+  });
+});
+// 入力欄を触ったら、その出演者のカードに切り替える
+$("performers").addEventListener("focusin", e=>{
+  const el = e.target.closest(".performer");
+  if(el) selectCard("p:" + el.id.slice(3));
+});
+// 拡大表示を閉じる(外側かカードを押す / Escキー)
+$("zoom").addEventListener("click", e=>{ if(!e.target.closest(".zoom-x")) closeZoom(); });
+document.addEventListener("keydown", e=>{ if(e.key === "Escape" && !$("zoom").classList.contains("hidden")) closeZoom(); });
+window.addEventListener("resize", fitCards);
+window.addEventListener("load", fitCards);
+if(document.fonts && document.fonts.ready){ document.fonts.ready.then(fitCards); }
+
+// 初期表示: 出演者0名からスタート(シートのメニューから開いた場合は、開催日と枚数を受け取っておく)
+readSheetHash();
+renderAll();
+</script>
+</body>
+</html>
