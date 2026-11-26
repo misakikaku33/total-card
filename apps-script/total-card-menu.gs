@@ -5,7 +5,8 @@
  * 使い方：「N月」シートで、開きたい週のブロック内のどこかを選んで、
  *         メニュー「集客・報酬カード」→「この週のカードを作る」
  *
- * ツールに渡すもの：開催日／出演者名／報酬プラン（D列）／ブロマイド会場（K列）／ブロマイド発送（L列）
+ * ツールに渡すもの：開催日／出演者名／報酬プラン（D列）／会場・配信の人数（F・G列）／ブロマイド会場（K列）／ブロマイド発送（L列）
+ *   ／団体扱いの人数（H・L列）／購入者一覧（取り込みフォルダのExcelから。iaReadLists・import-attendance.gs）
  * 渡し方：URLの「#d=...」（#より後ろはインターネット上に送られない）
  */
 
@@ -15,6 +16,13 @@ var TC_CONFIG = {
   PLAN_COL: 4,        // D列：報酬プラン
   VENUE_COL: 11,      // K列：ブロマイド 会場販売数
   SHIP_COL: 12,       // L列：ブロマイド 発送
+  COUNT_VENUE_COL: 6,   // F列：会場の集客人数
+  COUNT_STREAM_COL: 7,  // G列：配信の集客人数
+  GROUP_LABEL: '団体扱い',
+  GROUP_LABEL_COL: 5,         // E列：「団体扱い」(会場)
+  GROUP_VENUE_COL: 8,         // H列：団体扱いの会場人数
+  GROUP_STREAM_LABEL_COL: 11, // K列：「団体扱い」(配信)
+  GROUP_STREAM_COL: 12,       // L列：団体扱いの配信人数
   MAX_ROWS: 12,       // 1つの週ブロックで読む出演者の最大行数（今のシートは8行）
   MONTH_SHEET: /^\d{1,2}月$/
 };
@@ -23,6 +31,8 @@ function onOpen() {
   SpreadsheetApp.getUi()
     .createMenu('集客・報酬カード')
     .addItem('この週のカードを作る', 'openTotalCard')
+    .addSeparator()
+    .addItem('集客リストを今すぐ取り込む', 'iaImportNow')
     .addToUi();
 }
 
@@ -39,19 +49,32 @@ function openTotalCard() {
     ui.alert('選んでいる位置から、週の日付（例：2026-12-02）が見つかりませんでした。\n週のブロックの中のセルを選んでから、もう一度実行してください。');
     return;
   }
-  var payload = {date: found.date, sheet: sheet.getName(), rows: found.rows};
+  var payload = {v: 2, date: found.date, sheet: sheet.getName(), rows: found.rows, group: found.group};
+  try {
+    payload.lists = iaReadLists(found.date);
+  } catch (e) {
+    payload.lists = {venue: null, stream: null, eventName: '', nameFallback: '',
+      notes: ['購入者一覧を読めませんでした: ' + String(e && e.message || e)]};
+  }
   var url = TC_CONFIG.TOOL_URL + '#d=' + encodeURIComponent(JSON.stringify(payload));
+  if (url.length > 1500000) {   // 大きすぎてブラウザが開けなくなるのを避ける
+    payload.lists = {venue: null, stream: null, eventName: '', nameFallback: '',
+      notes: ['購入者一覧が大きすぎて渡せませんでした。ツールにExcelを直接入れてください。']};
+    url = TC_CONFIG.TOOL_URL + '#d=' + encodeURIComponent(JSON.stringify(payload));
+  }
+  var L = payload.lists;
+  var listInfo = '購入者一覧: 来場者 ' + (L.venue ? L.venue.length + '件' : 'なし') + ' / 配信 ' + (L.stream ? L.stream.length + '件' : 'なし');
 
   var names = found.rows.length;
   var html = HtmlService.createHtmlOutput(
     '<div style="font-family:sans-serif;font-size:14px;line-height:1.7">' +
-    '<p>' + found.date + ' の分（出演者 ' + names + '名）を渡して、ツールを開きます。</p>' +
+    '<p>' + found.date + ' の分（出演者 ' + names + '名）を渡して、ツールを開きます。<br>' + listInfo + '</p>' +
     '<p>自動で開かない場合は、下のボタンを押してください。</p>' +
     '<p><a href="' + url.replace(/&/g, '&amp;').replace(/"/g, '&quot;') + '" target="_blank" ' +
     'style="display:inline-block;padding:10px 18px;background:#3c6230;color:#fff;border-radius:99px;text-decoration:none;font-weight:bold">ツールを開く</a></p>' +
     '<script>window.open(' + JSON.stringify(url).replace(/</g, '\\x3c') + ', "_blank");</script>' +
     '</div>')
-    .setWidth(360).setHeight(190);
+    .setWidth(380).setHeight(220);
   ui.showModalDialog(html, '集客・報酬カード');
 }
 
@@ -92,14 +115,33 @@ function tcFindBlock_(sheet, activeRow) {
         name: name,
         plan: String(vals[i][TC_CONFIG.PLAN_COL - 1]).trim(),
         bVenue: tcToNum_(vals[i][TC_CONFIG.VENUE_COL - 1]),
-        bShip: tcToNum_(vals[i][TC_CONFIG.SHIP_COL - 1])
+        bShip: tcToNum_(vals[i][TC_CONFIG.SHIP_COL - 1]),
+        cVenue: tcToNum_(vals[i][TC_CONFIG.COUNT_VENUE_COL - 1]),
+        cStream: tcToNum_(vals[i][TC_CONFIG.COUNT_STREAM_COL - 1])
       });
     }
   }
-  return {date: String(colC[dateRow - 1][0]).trim(), rows: rows};
+  return {date: String(colC[dateRow - 1][0]).trim(), rows: rows, group: tcFindGroup_(sheet, headerRow, last, colC, isDate)};
 }
 
 function tcToNum_(s) {
   var n = Number(String(s == null ? '' : s).replace(/[^\d.\-]/g, ''));
   return isFinite(n) && n > 0 ? n : 0;
+}
+
+/** 週ブロックの「団体扱い」の行から、会場(H列)・配信(L列)の人数を読む。見つからなければ null */
+function tcFindGroup_(sheet, headerRow, last, colC, isDate) {
+  var endRow = last;
+  for (var r = headerRow + 1; r <= last; r++) { if (isDate(colC[r - 1][0])) { endRow = r - 1; break; } }
+  var n = endRow - headerRow;
+  if (n < 1) return null;
+  var width = TC_CONFIG.GROUP_STREAM_COL;
+  var vals = sheet.getRange(headerRow + 1, 1, n, width).getDisplayValues();
+  for (var i = 0; i < n; i++) {
+    if (String(vals[i][TC_CONFIG.GROUP_LABEL_COL - 1]).trim() === TC_CONFIG.GROUP_LABEL) {
+      var streamOk = String(vals[i][TC_CONFIG.GROUP_STREAM_LABEL_COL - 1]).trim() === TC_CONFIG.GROUP_LABEL;
+      return {v: tcToNum_(vals[i][TC_CONFIG.GROUP_VENUE_COL - 1]), s: streamOk ? tcToNum_(vals[i][TC_CONFIG.GROUP_STREAM_COL - 1]) : 0};
+    }
+  }
+  return null;
 }

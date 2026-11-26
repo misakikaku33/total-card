@@ -298,7 +298,7 @@
   <div class="masthead">
     <div class="eyebrow">GUEST LIST &amp; REWARD</div>
     <h1>【ミサキカク毎週公演】集客・報酬カード作成ツール</h1>
-    <p class="sub">来場者リストと配信購入リストのExcelを入れると、出演者ごとの集客数が自動で入ります。プランなどを入力すると、集客リストと精算をまとめた1枚のカードを保存できます(2026年8〜12月プラン対応)。</p>
+    <p class="sub">シートのメニューから開くと、その週の出演者・集客数・購入者一覧が自動で入ります(直接開いたときは、来場者リストと配信購入リストのExcelを入れてください)。プランなどを入力すると、集客リストと精算をまとめた1枚のカードを保存できます(2026年8〜12月プラン対応)。</p>
   </div>
 
   <!-- 上部: 左にイベント設定、右にExcelを入れる場所(半々) -->
@@ -591,8 +591,9 @@ async function handleFiles(files){
 function aggregateLists(){
   const map = new Map();
   const get = p => {
-    if(!map.has(p)) map.set(p, {performer:p, venue:[], stream:[]});
-    return map.get(p);
+    const k = normKey(p);   // スペース・全角半角の違いを無視して同じ人にまとめる
+    if(!map.has(k)) map.set(k, {performer:p, venue:[], stream:[]});
+    return map.get(k);
   };
   (venueRows||[]).forEach(r => get(r.performer).venue.push(r));
   (streamRows||[]).forEach(r => get(r.performer).stream.push(r));
@@ -617,7 +618,7 @@ function syncFromExcel(){
   let matched=0, added=0, skipped=0, unassigned=0;
   sortedGroups(aggregateLists()).forEach(a=>{
     if(UNASSIGNED_NAMES.includes(a.performer)){ unassigned += a.vQty + a.sQty; return; }
-    const exist = performers.find(p => p.name.trim() === a.performer);
+    const exist = performers.find(p => normKey(p.name) === normKey(a.performer));
     if(exist){ exist.tVenue = a.vQty; exist.tStream = a.sQty; matched++; }
     else if(pushPerformer({name:a.performer, plan:"p1", tVenue:a.vQty, tStream:a.sQty})){ added++; }
     else { skipped++; } // 出演者の上限(8名)に達したため追加できなかった
@@ -656,16 +657,50 @@ function readSheetHash(){
       rows: d.rows.map(r=>({
         name: String(r.name||"").trim(), key: normKey(r.name),
         bVenue: Math.max(0, Number(r.bVenue)||0), bShip: Math.max(0, Number(r.bShip)||0),
-        plan: planKeyFromLabel(r.plan)   // 反映しない場合は ""
-      })).filter(r=>r.key)
+        plan: planKeyFromLabel(r.plan),   // 反映しない場合は ""
+        cVenue: r.cVenue==null ? null : Math.max(0, Number(r.cVenue)||0),   // シートの会場人数(F列)
+        cStream: r.cStream==null ? null : Math.max(0, Number(r.cStream)||0) // シートの配信人数(G列)
+      })).filter(r=>r.key),
+      hasCounts: d.v === 2,
+      group: d.group ? {v: Math.max(0, Number(d.group.v)||0), s: Math.max(0, Number(d.group.s)||0)} : null,
+      lists: d.lists || null
     };
     // 名前がURLに残らないよう、受け取ったら消す
     history.replaceState(null, "", location.pathname + location.search);
     if(sheetData.date){ const el = $("evDate"); el.value = sheetData.date; el.dataset.auto = ""; }
+    buildFromSheet();
   }catch(e){
     console.error(e); sheetData = null;
     toast("シートから受け取ったデータを読めませんでした");
   }
+}
+// シートの人数(F・G列)と、フォルダのExcelから読んだ購入者一覧を、そのまま出演者・カードに入れる(新しい届け方)
+// 届いたデータに人数が入っていない古い形式のときは、何もしない(今までどおりExcelを入れた時に出演者が入る)
+function buildFromSheet(){
+  if(!sheetData || !sheetData.hasCounts) return;
+  const L = sheetData.lists;
+  if(L){
+    if(Array.isArray(L.venue)){
+      venueRows = L.venue.map(a=>({performer: clean(a[0]) || "（扱いなし）", buyer: clean(a[1]), kana: clean(a[2]),
+        qty: Number(a[3])||0, cancelled: !!a[4], note: clean(a[5])}));
+    }
+    if(Array.isArray(L.stream)){
+      streamRows = L.stream.map(a=>({performer: clean(a[0]) || "（扱いなし）", qty: Number(a[1])||0,
+        buyerId: clean(a[2]), buyerName: clean(a[3]), comment: clean(a[4])}));
+    }
+    if(L.eventName) eventInfo.name = String(L.eventName);
+    if(L.nameFallback) eventInfo.nameFallback = String(L.nameFallback);
+  }
+  const cv = $("chipVenue"), cs = $("chipStream");
+  if(venueRows){ cv.classList.add("ok"); cv.innerHTML = `<span class="dot"></span><span>来場者リスト:${venueRows.length}件 シートから受取済</span>`; }
+  if(streamRows){ cs.classList.add("ok"); cs.innerHTML = `<span class="dot"></span><span>配信購入リスト:${streamRows.length}件 シートから受取済</span>`; }
+  sheetData.rows.forEach(r=>{
+    pushPerformer({name:r.name, plan:r.plan || "p1", tVenue:r.cVenue||0, tStream:r.cStream||0, bVenue:r.bVenue, bShip:r.bShip});
+  });
+  if(sheetData.group) $("extraAudience").value = sheetData.group.v + sheetData.group.s;
+  const nameEl = $("evName");
+  const autoName = eventInfo.name || eventInfo.nameFallback;
+  if(autoName && !nameEl.value){ nameEl.value = autoName; nameEl.dataset.auto = "1"; }
 }
 // シートのプラン名(「プラン5A」など)を、ツールのプランの種類に直す。「その他」・空欄・見つからない名前は "" (反映しない)
 function planKeyFromLabel(label){
@@ -701,7 +736,11 @@ function applySheetData(){
   if(!sheetData) return;
   performers.forEach(p=>{
     const r = findSheetRow(p.name);
-    if(r){ p.bVenue = r.bVenue; p.bShip = r.bShip; if(r.plan) p.plan = r.plan; }
+    if(r){
+      p.bVenue = r.bVenue; p.bShip = r.bShip; if(r.plan) p.plan = r.plan;
+      if(r.cVenue != null) p.tVenue = r.cVenue;
+      if(r.cStream != null) p.tStream = r.cStream;
+    }
   });
 }
 // 名前を打っている最中の1人分(入力欄の値だけ直接書き換える。フォーカスを外さないため)
@@ -710,6 +749,8 @@ function applySheetToOne(p){
   const r = findSheetRow(p.name);
   if(!r) return;
   p.bVenue = r.bVenue; p.bShip = r.bShip;
+  if(r.cVenue != null) p.tVenue = r.cVenue;
+  if(r.cStream != null) p.tStream = r.cStream;
   const root = document.getElementById("pf-"+p.id);
   if(r.plan && r.plan !== p.plan){
     const wasFixed = PLANS[p.plan].type === "fixed";
@@ -727,6 +768,8 @@ function applySheetToOne(p){
   if(!root) return;
   const setv = (k,v)=>{ const el = root.querySelector(`input[oninput*="'${k}'"]`); if(el) el.value = v; };
   setv("bVenue", r.bVenue); setv("bShip", r.bShip);
+  if(r.cVenue != null) setv("tVenue", r.cVenue);
+  if(r.cStream != null) setv("tStream", r.cStream);
 }
 function renderSheetPanel(){
   const panel = $("sheetPanel");
@@ -738,7 +781,7 @@ function renderSheetPanel(){
   const unused = sheetData.rows.filter(r=>!usedKeys.has(r.key));
   let h = `<div>${sheetData.date ? escapeHtml(fmtDate(sheetData.date)) + " の分を" : ""}受け取りました(シートの出演者 ${sheetData.rows.length}名)。</div>`;
   if(!named.length){
-    h += `<div class="sm">出演者がまだいません。Excelを入れると、同じ名前の人にブロマイド枚数が自動で入ります。</div>`;
+    h += `<div class="sm">出演者がまだいません。${sheetData.hasCounts ? "出演者を追加すると" : "Excelを入れると"}、同じ名前の人にブロマイド枚数が自動で入ります。</div>`;
   } else {
     h += missing.length
       ? `<div><span class="bad">シートに該当なし:</span> ${missing.map(escapeHtml).join("、")} <span class="sm">(ブロマイド枚数は手で入力してください)</span></div>`
@@ -747,6 +790,23 @@ function renderSheetPanel(){
   }
   const noPlan = named.map(p=>({p, r:findSheetRow(p.name)})).filter(x=>x.r && !x.r.plan).map(x=>x.p.name.trim());
   if(noPlan.length) h += `<div class="sm">プランを入れていない人(シートが「その他」・空欄): ${noPlan.map(escapeHtml).join("、")}(手で選んでください)</div>`;
+  if(sheetData.hasCounts){
+    const L = sheetData.lists;
+    if(L && L.notes && L.notes.length) h += L.notes.map(n=>`<div class="sm">${escapeHtml(n)}</div>`).join("");
+    const lists = aggregateLists();
+    const diffs = [];
+    named.forEach(p=>{
+      const a = lists.get(normKey(p.name));
+      const vSum = a ? a.vQty : 0, sSum = a ? a.sQty : 0;
+      if(venueRows && p.tVenue !== vSum) diffs.push(`${escapeHtml(p.name.trim())}(会場 入力${p.tVenue}名/一覧${vSum}名)`);
+      if(streamRows && p.tStream !== sSum) diffs.push(`${escapeHtml(p.name.trim())}(配信 入力${p.tStream}名/一覧${sSum}名)`);
+    });
+    if(diffs.length) h += `<div><span class="bad">人数が一覧の合計とズレています:</span> ${diffs.join("、")} <span class="sm">(カード上部の人数と報酬は、入力欄の人数を使います)</span></div>`;
+    const known = new Set(named.map(p=>normKey(p.name)));
+    const orphan = [...lists.entries()].filter(([k,a])=>!known.has(k) && !UNASSIGNED_NAMES.includes(a.performer))
+      .map(([k,a])=>`${escapeHtml(a.performer)}(${a.vQty+a.sQty}名)`);
+    if(orphan.length) h += `<div class="sm">一覧にあるが、出演者にいない名前: ${orphan.join("、")}(出演者を追加して同じ名前を入れると、カードに載ります)</div>`;
+  }
   h += `<div class="sm">並び順: Excelを入れると、シートから届いた順に並べます(一覧にない人は後ろ)。届いた順: ${sheetData.rows.map(r=>escapeHtml(r.name)).join(" → ")}</div>`;
   $("sheetMsg").innerHTML = h;
 }
@@ -1074,7 +1134,7 @@ function renderCards(c){
   soloGroups = sortedGroups(lists).filter(a => UNASSIGNED_NAMES.includes(a.performer));
 
   const perfHtml = c.rows.map(r=>{
-    const L = lists.get(r.p.name.trim()) || {venue:[], stream:[]};
+    const L = lists.get(normKey(r.p.name)) || {venue:[], stream:[]};
     return `
     <div class="card-slot" data-key="p:${r.p.id}">
       <div class="card-tools">
