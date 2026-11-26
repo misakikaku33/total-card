@@ -386,7 +386,7 @@
     ※ 「固定ギャラ」は入力した金額がそのまま報酬額(内税)になります(上乗せ・参加費なし)。固定ギャラの人の集客は、「集客を含める」にチェックを入れた場合だけ全体50名インセンティブのカウントに含めます。<br>
     ※ 報酬額がマイナスの場合(参加費 &gt; 報酬)は源泉徴収なし・出演者からお支払いいただく金額として赤字表示されます。<br>
     ※ 会場・配信チケットの人数を手で直した場合、カード上部の人数と報酬計算は直した数字を使います(カード右側の名前リストはExcelの内容のままです)。<br>
-    ※ スプレッドシートのメニューから開くと、その週の開催日とブロマイド枚数(会場・発送)を受け取り、同じ名前の出演者に自動で入れます。Excelを入れたあとにも入れ直します(手で直した枚数はその時に上書きされます)。名前はスペースや全角半角の違いを無視して比べます。シートにない名前は「シートに該当なし」と表示するので、手で入力してください。出演者の並び順も、Excelを入れた時点でシートから届いた順になります(シートにない人は後ろに、集客の多い順で並びます)。<br>
+    ※ スプレッドシートのメニューから開くと、その週の開催日とブロマイド枚数(会場・発送)を受け取り、同じ名前の出演者に自動で入れます。Excelを入れたあとにも入れ直します(手で直した枚数はその時に上書きされます)。報酬プラン(シートのD列)も同じように入ります。ただし「その他」や空欄の人は、プランは入れません(手で選んでください)。名前はスペースや全角半角の違いを無視して比べます。シートにない名前は「シートに該当なし」と表示するので、手で入力してください。出演者の並び順も、Excelを入れた時点でシートから届いた順になります(シートにない人は後ろに、集客の多い順で並びます)。<br>
     ※ ブラウザを閉じる・再読み込みすると入力内容は消えます。
   </p>
 </div>
@@ -655,7 +655,8 @@ function readSheetHash(){
       date: /^\d{4}-\d{2}-\d{2}$/.test(d.date||"") ? d.date : "",
       rows: d.rows.map(r=>({
         name: String(r.name||"").trim(), key: normKey(r.name),
-        bVenue: Math.max(0, Number(r.bVenue)||0), bShip: Math.max(0, Number(r.bShip)||0)
+        bVenue: Math.max(0, Number(r.bVenue)||0), bShip: Math.max(0, Number(r.bShip)||0),
+        plan: planKeyFromLabel(r.plan)   // 反映しない場合は ""
       })).filter(r=>r.key)
     };
     // 名前がURLに残らないよう、受け取ったら消す
@@ -665,6 +666,12 @@ function readSheetHash(){
     console.error(e); sheetData = null;
     toast("シートから受け取ったデータを読めませんでした");
   }
+}
+// シートのプラン名(「プラン5A」など)を、ツールのプランの種類に直す。「その他」・空欄・見つからない名前は "" (反映しない)
+function planKeyFromLabel(label){
+  const k = normKey(label);
+  if(!k) return "";
+  return PLAN_ORDER.find(id => normKey(PLANS[id].label) === k) || "";
 }
 function findSheetRow(name){
   const key = normKey(name);
@@ -694,7 +701,7 @@ function applySheetData(){
   if(!sheetData) return;
   performers.forEach(p=>{
     const r = findSheetRow(p.name);
-    if(r){ p.bVenue = r.bVenue; p.bShip = r.bShip; }
+    if(r){ p.bVenue = r.bVenue; p.bShip = r.bShip; if(r.plan) p.plan = r.plan; }
   });
 }
 // 名前を打っている最中の1人分(入力欄の値だけ直接書き換える。フォーカスを外さないため)
@@ -704,6 +711,19 @@ function applySheetToOne(p){
   if(!r) return;
   p.bVenue = r.bVenue; p.bShip = r.bShip;
   const root = document.getElementById("pf-"+p.id);
+  if(r.plan && r.plan !== p.plan){
+    const wasFixed = PLANS[p.plan].type === "fixed";
+    p.plan = r.plan;
+    if(wasFixed){
+      // 固定ギャラの入力欄を外すため、作り直す(名前欄のフォーカスは戻す)
+      renderPerformerInputs();
+      const el = document.querySelector(`#pf-${p.id} input[type=text]`);
+      if(el){ el.focus(); const n = el.value.length; el.setSelectionRange(n, n); }
+      return;
+    }
+    const sel = root && root.querySelector("select");
+    if(sel) sel.value = r.plan;   // 入力欄は変わらないので、選択だけ直す(打っている途中の名前欄を壊さない)
+  }
   if(!root) return;
   const setv = (k,v)=>{ const el = root.querySelector(`input[oninput*="'${k}'"]`); if(el) el.value = v; };
   setv("bVenue", r.bVenue); setv("bShip", r.bShip);
@@ -725,6 +745,8 @@ function renderSheetPanel(){
       : `<div>出演者の ${named.length}名すべてに、ブロマイド枚数を入れました。</div>`;
     if(unused.length) h += `<div class="sm">シートにあるが、ツールの出演者にいない名前: ${unused.map(r=>escapeHtml(r.name)).join("、")}</div>`;
   }
+  const noPlan = named.map(p=>({p, r:findSheetRow(p.name)})).filter(x=>x.r && !x.r.plan).map(x=>x.p.name.trim());
+  if(noPlan.length) h += `<div class="sm">プランを入れていない人(シートが「その他」・空欄): ${noPlan.map(escapeHtml).join("、")}(手で選んでください)</div>`;
   h += `<div class="sm">並び順: Excelを入れると、シートから届いた順に並べます(一覧にない人は後ろ)。届いた順: ${sheetData.rows.map(r=>escapeHtml(r.name)).join(" → ")}</div>`;
   $("sheetMsg").innerHTML = h;
 }

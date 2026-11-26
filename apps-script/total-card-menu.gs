@@ -5,13 +5,14 @@
  * 使い方：「N月」シートで、開きたい週のブロック内のどこかを選んで、
  *         メニュー「集客・報酬カード」→「この週のカードを作る」
  *
- * ツールに渡すもの：開催日／出演者名／ブロマイド会場（K列）／ブロマイド発送（L列）
+ * ツールに渡すもの：開催日／出演者名／報酬プラン（D列）／ブロマイド会場（K列）／ブロマイド発送（L列）
  * 渡し方：URLの「#d=...」（#より後ろはインターネット上に送られない）
  */
 
 var TC_CONFIG = {
   TOOL_URL: 'https://misakikaku33.github.io/total-card/',   // 公開後のURL（リポジトリ名を変えたらここも直す）
   NAME_COL: 3,        // C列：名前
+  PLAN_COL: 4,        // D列：報酬プラン
   VENUE_COL: 11,      // K列：ブロマイド 会場販売数
   SHIP_COL: 12,       // L列：ブロマイド 発送
   MAX_ROWS: 12,       // 1つの週ブロックで読む出演者の最大行数（今のシートは8行）
@@ -56,7 +57,7 @@ function openTotalCard() {
 
 /**
  * 選んでいる行から上にさかのぼって、週の日付の行（C列が yyyy-mm-dd）を探し、
- * そのブロックの出演者（名前・K列・L列）を読む。
+ * そのブロックの出演者（名前・D列・K列・L列）を読む。
  * 次の週の日付の行までを範囲とし、選んだ行が次の週に入っていたらそちらを使う。
  */
 function tcFindBlock_(sheet, activeRow) {
@@ -89,6 +90,7 @@ function tcFindBlock_(sheet, activeRow) {
       if (!name) continue;
       rows.push({
         name: name,
+        plan: String(vals[i][TC_CONFIG.PLAN_COL - 1]).trim(),
         bVenue: tcToNum_(vals[i][TC_CONFIG.VENUE_COL - 1]),
         bShip: tcToNum_(vals[i][TC_CONFIG.SHIP_COL - 1])
       });
